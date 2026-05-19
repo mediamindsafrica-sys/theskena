@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Intake Form | Skena</title>
+    
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0A0A0A',
+                            panel: '#1A1A1A',
+                            gold: '#C9A962',
+                            text: '#F5F5F5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .luxury-panel { 
+            background: #1A1A1A; 
+            border: 1px solid rgba(201, 169, 98, 0.15); 
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .luxury-panel:hover {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+        
+        .gold-gradient-text {
+            background: linear-gradient(to right, #C9A962, #E8D399, #C9A962);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* Smooth Reveal Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+
+        /* Form Inputs */
+        .luxury-input {
+            background: #0F0F0F;
+            border: 1px solid #222;
+            transition: all 0.4s ease;
+        }
+        .luxury-input:focus {
+            border-color: #C9A962;
+            box-shadow: 0 0 15px rgba(201,169,98,0.1);
+            outline: none;
+        }
+        
+        /* Custom File Input */
+        input[type="file"]::file-selector-button {
+            border: 1px solid #C9A962;
+            background: rgba(201,169,98,0.1);
+            color: #C9A962;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: bold;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background: #C9A962;
+            color: #000;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-text font-sans selection:bg-brand-gold selection:text-black antialiased overflow-x-hidden">
+
+    <nav id="main-nav" class="fixed w-full z-50 top-0 border-b border-gray-800 bg-brand-dark/95 backdrop-blur-md transition-all duration-500 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-6">
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <img id="nav-logo" src="logo.png" alt="Skena Logo" class="h-32 w-auto object-contain transition-all duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold font-serif tracking-widest text-white transition duration-500 group-hover:text-brand-gold">SKENA</span>
+                    <span class="text-[10px] text-brand-gold uppercase tracking-widest">The Future of Networking</span>
+                </div>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 items-center text-sm tracking-wide">
+                <a href="index.html" class="text-gray-400 hover:text-brand-gold transition duration-500">Home</a>
+                <a href="products.html" class="text-gray-400 hover:text-brand-gold transition duration-500">Cards</a>
+                <a href="packages.html" class="text-gray-400 hover:text-brand-gold transition duration-500">Packages</a>
+                <a href="order-form.html" class="text-brand-gold font-bold border-b border-brand-gold pb-1"><i class="fa-solid fa-clipboard-list mr-1"></i> Order Form</a>
+                <a href="faq.html" class="text-gray-400 hover:text-brand-gold transition duration-500">FAQ</a>
+                <a href="checkout.html" class="bg-brand-gold text-black px-6 py-2 rounded font-bold hover:bg-[#b59858] transition duration-500 shadow-[0_0_15px_rgba(201,169,98,0.3)]">Order Now</a>
+            </div>
+            
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-2xl text-brand-gold"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        
+        <div id="mobile-menu" class="hidden bg-brand-panel p-4 flex flex-col space-y-4 border-t border-gray-800 absolute w-full left-0 shadow-2xl">
+            <a href="index.html" class="py-2 text-gray-300">Home</a>
+            <a href="products.html" class="py-2 text-gray-300">Cards</a>
+            <a href="packages.html" class="py-2 text-gray-300">Packages</a>
+            <a href="order-form.html" class="py-2 text-brand-gold font-bold">Order Form</a>
+            <a href="faq.html" class="py-2 text-gray-300">FAQ</a>
+            <a href="checkout.html" class="py-2 text-gray-300">Order Now</a>
+        </div>
+    </nav>
+
+    <main class="pt-40 pb-24">
+        <div class="max-w-4xl mx-auto px-6">
+            
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-xs text-brand-gold tracking-widest uppercase mb-3 font-bold">Card Customization</h2>
+                <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4 text-white">Profile Intake Form</h1>
+                <p class="text-gray-400 text-lg font-light tracking-wide max-w-2xl mx-auto">Please provide the professional details and branding assets you wish to embed into your new Skena digital portfolio.</p>
+            </div>
+
+            <div class="luxury-panel p-8 md:p-12 rounded-lg reveal delay-100 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-gold/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+
+                <form id="intake-form" onsubmit="event.preventDefault(); submitIntakeForm();" class="relative z-10">
+                    
+                    <h3 class="text-xl font-serif font-bold mb-6 text-brand-gold border-b border-gray-800 pb-3 flex items-center">
+                        <span class="text-gray-600 mr-3 text-2xl">01.</span> Core Identity
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6 mb-10">
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">First Name *</label>
+                            <input type="text" id="f-name" required class="luxury-input w-full rounded p-4 text-white font-light" placeholder="e.g. Jane">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Last Name *</label>
+                            <input type="text" id="l-name" required class="luxury-input w-full rounded p-4 text-white font-light" placeholder="e.g. Doe">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Job Title</label>
+                            <input type="text" id="job-title" class="luxury-input w-full rounded p-4 text-white font-light" placeholder="e.g. Marketing Director">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Company Name</label>
+                            <input type="text" id="company-name" class="luxury-input w-full rounded p-4 text-white font-light" placeholder="e.g. Skena Technologies">
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-serif font-bold mb-6 text-brand-gold border-b border-gray-800 pb-3 flex items-center">
+                        <span class="text-gray-600 mr-3 text-2xl">02.</span> Contact Details
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6 mb-10">
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Primary Email *</label>
+                            <input type="email" id="contact-email" required class="luxury-input w-full rounded p-4 text-white font-light" placeholder="jane@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Phone Number *</label>
+                            <input type="tel" id="contact-phone" required class="luxury-input w-full rounded p-4 text-white font-light" placeholder="+254 700 000 000">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Website URL</label>
+                            <input type="url" id="contact-website" class="luxury-input w-full rounded p-4 text-white font-light" placeholder="https://www.yourwebsite.com">
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-serif font-bold mb-6 text-brand-gold border-b border-gray-800 pb-3 flex items-center">
+                        <span class="text-gray-600 mr-3 text-2xl">03.</span> Social Links
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6 mb-10">
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold"><i class="fa-brands fa-linkedin text-blue-500 mr-1"></i> LinkedIn Profile</label>
+                            <input type="text" id="social-linkedin" class="luxury-input w-full rounded p-4 text-white font-light" placeholder="linkedin.com/in/username">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold"><i class="fa-brands fa-instagram text-pink-500 mr-1"></i> Instagram Handle</label>
+                            <input type="text" id="social-ig" class="luxury-input w-full rounded p-4 text-white font-light" placeholder="@username">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Other Link (Calendly, Portfolio, Twitter)</label>
+                            <input type="text" id="social-other" class="luxury-input w-full rounded p-4 text-white font-light" placeholder="URL">
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-serif font-bold mb-6 text-brand-gold border-b border-gray-800 pb-3 flex items-center">
+                        <span class="text-gray-600 mr-3 text-2xl">04.</span> Card Branding
+                    </h3>
+                    <div class="space-y-6 mb-12">
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Card Finish Preference</label>
+                            <select id="card-finish" class="luxury-input w-full rounded p-4 text-white font-light appearance-none cursor-pointer">
+                                <option value="Matte Black with Gold Logo">Matte Black with Gold Logo (Signature)</option>
+                                <option value="Matte Black with Silver Logo">Matte Black with Silver Logo</option>
+                                <option value="Custom Corporate Colors">Custom Corporate Colors</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Upload Logo (Optional via form)</label>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">For best results, we will request a high-res vector (SVG/AI) via WhatsApp/Email.</p>
+                            <input type="file" accept="image/*,.pdf,.ai,.eps" class="luxury-input w-full rounded p-3 text-gray-400 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Additional Design Notes</label>
+                            <textarea id="design-notes" rows="3" class="luxury-input w-full rounded p-4 text-white font-light" placeholder="Any specific requirements for your profile or physical card layout..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-800 pt-8 text-center">
+                        <button type="submit" class="inline-flex items-center justify-center w-full md:w-auto px-12 py-5 bg-brand-gold hover:bg-[#b59858] text-black font-bold uppercase tracking-widest text-sm rounded shadow-[0_0_20px_rgba(201,169,98,0.3)] hover:shadow-[0_0_30px_rgba(201,169,98,0.5)] transform transition duration-500 hover:-translate-y-1 group">
+                            <i class="fa-brands fa-whatsapp text-xl mr-3 group-hover:scale-110 transition duration-300"></i> Submit Brief via WhatsApp
+                        </button>
+                        <p class="text-xs text-gray-500 mt-4 font-light"><i class="fa-solid fa-circle-info mr-1 text-brand-gold"></i> Your details will be formatted and securely sent to our concierge team.</p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-[#050505] border-t border-gray-900 pt-16 pb-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-gray-600 font-serif tracking-widest text-xs uppercase">© 2025 Skena Luxury Networking. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            const logo = document.getElementById('nav-logo');
+            if (window.scrollY > 50) {
+                nav.classList.remove('py-4');
+                nav.classList.add('py-2', 'shadow-2xl');
+                logo.classList.remove('h-32');
+                logo.classList.add('h-16');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2', 'shadow-2xl');
+                logo.classList.add('h-32');
+                logo.classList.remove('h-16');
+            }
+        });
+
+        // Intersection Observer for scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        setTimeout(() => { entry.target.style.opacity = '1'; }, 1000);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+
+        // Form Submission to WhatsApp
+        function submitIntakeForm() {
+            // Identity
+            const fName = document.getElementById('f-name').value.trim();
+            const lName = document.getElementById('l-name').value.trim();
+            const jobTitle = document.getElementById('job-title').value.trim() || 'N/A';
+            const company = document.getElementById('company-name').value.trim() || 'N/A';
+            
+            // Contact
+            const email = document.getElementById('contact-email').value.trim();
+            const phone = document.getElementById('contact-phone').value.trim();
+            const website = document.getElementById('contact-website').value.trim() || 'N/A';
+            
+            // Social
+            const linkedin = document.getElementById('social-linkedin').value.trim() || 'N/A';
+            const ig = document.getElementById('social-ig').value.trim() || 'N/A';
+            const other = document.getElementById('social-other').value.trim() || 'N/A';
+            
+            // Branding
+            const finish = document.getElementById('card-finish').value;
+            const notes = document.getElementById('design-notes').value.trim() || 'None';
+
+            let msg = `*💎 SKENA PROFILE DESIGN BRIEF*%0A%0A`;
+            
+            msg += `*01. Identity*%0A`;
+            msg += `Name: ${fName} ${lName}%0A`;
+            msg += `Title: ${jobTitle}%0A`;
+            msg += `Company: ${company}%0A%0A`;
+            
+            msg += `*02. Contact*%0A`;
+            msg += `Email: ${email}%0A`;
+            msg += `Phone: ${phone}%0A`;
+            msg += `Web: ${website}%0A%0A`;
+            
+            msg += `*03. Socials*%0A`;
+            msg += `LinkedIn: ${linkedin}%0A`;
+            msg += `IG: ${ig}%0A`;
+            msg += `Other: ${other}%0A%0A`;
+            
+            msg += `*04. Card Branding*%0A`;
+            msg += `Finish: ${finish}%0A`;
+            msg += `Notes: ${notes}%0A%0A`;
+            
+            msg += `_I am ready to proceed with my design proof._`;
+
+            // Open WhatsApp
+            window.open(`https://wa.me/254113895800?text=${msg}`, '_blank');
+        }
+    </script>
+</body>
+</html>

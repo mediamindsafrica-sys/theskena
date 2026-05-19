@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Skena</title>
+    
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0A0A0A',
+                            panel: '#1A1A1A',
+                            gold: '#C9A962',
+                            text: '#F5F5F5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .luxury-panel { 
+            background: #1A1A1A; 
+            border: 1px solid rgba(201, 169, 98, 0.15); 
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .luxury-panel:hover {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+        
+        .gold-gradient-text {
+            background: linear-gradient(to right, #C9A962, #E8D399, #C9A962);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* Smooth Reveal Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+
+        /* Custom Radio Button Styling */
+        .option-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        input[type="radio"]:checked + div {
+            border-color: #C9A962;
+            background-color: rgba(201, 169, 98, 0.05);
+            transform: scale(1.01);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        input[type="radio"]:checked + div .radio-dot {
+            background-color: #C9A962;
+            border-color: #C9A962;
+            box-shadow: 0 0 10px rgba(201,169,98,0.5);
+        }
+        .radio-disabled {
+            opacity: 0.3;
+            pointer-events: none;
+            filter: grayscale(100%);
+        }
+
+        /* Form Inputs */
+        .luxury-input {
+            background: #0F0F0F;
+            border: 1px solid #333;
+            transition: all 0.4s ease;
+        }
+        .luxury-input:focus {
+            border-color: #C9A962;
+            box-shadow: 0 0 15px rgba(201,169,98,0.1);
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-text font-sans selection:bg-brand-gold selection:text-black antialiased overflow-x-hidden">
+
+    <nav id="main-nav" class="fixed w-full z-50 top-0 border-b border-gray-800 bg-brand-dark/95 backdrop-blur-md transition-all duration-500 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-6">
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <img id="nav-logo" src="logo.png" alt="Skena Logo" class="h-32 w-auto object-contain transition-all duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold font-serif tracking-widest text-white transition duration-500 group-hover:text-brand-gold">SKENA</span>
+                    <span class="text-[10px] text-brand-gold uppercase tracking-widest">The Future of Networking</span>
+                </div>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 items-center text-sm tracking-wide">
+                <a href="index.html" class="text-gray-400 hover:text-brand-gold transition duration-500">Home</a>
+                <a href="products.html" class="text-gray-400 hover:text-brand-gold transition duration-500">Cards</a>
+                <a href="packages.html" class="text-gray-400 hover:text-brand-gold transition duration-500">Packages</a>
+                <a href="order-form.html" class="text-gray-400 hover:text-brand-gold transition duration-500"><i class="fa-solid fa-clipboard-list mr-1"></i> Order Form</a>
+                <a href="faq.html" class="text-gray-400 hover:text-brand-gold transition duration-500">FAQ</a>
+                <a href="checkout.html" class="text-brand-gold font-bold border-b border-brand-gold pb-1">Order Now</a>
+            </div>
+            
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-2xl text-brand-gold"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        
+        <div id="mobile-menu" class="hidden bg-brand-panel p-4 flex flex-col space-y-4 border-t border-gray-800 absolute w-full left-0 shadow-2xl">
+            <a href="index.html" class="py-2 text-gray-300">Home</a>
+            <a href="products.html" class="py-2 text-gray-300">Cards</a>
+            <a href="packages.html" class="py-2 text-gray-300">Packages</a>
+            <a href="order-form.html" class="py-2 text-gray-300">Order Form</a>
+            <a href="faq.html" class="py-2 text-gray-300">FAQ</a>
+            <a href="checkout.html" class="py-2 text-brand-gold font-bold">Order Now</a>
+        </div>
+    </nav>
+
+    <main class="pt-40 pb-24">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-xs text-brand-gold tracking-widest uppercase mb-3 font-bold">Secure Checkout</h2>
+                <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4 text-white">Finalize Your Order</h1>
+                <p class="text-gray-400 text-lg font-light tracking-wide max-w-xl mx-auto">Design your custom networking package in two simple steps.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-12 max-w-6xl mx-auto">
+                
+                <div class="lg:col-span-7 space-y-10">
+                    
+                    <div class="luxury-panel p-8 md:p-10 rounded-lg reveal delay-100">
+                        <h3 class="text-xl font-serif font-bold mb-8 text-brand-gold border-b border-gray-800 pb-4 flex items-center">
+                            <span class="text-gray-600 mr-3 text-2xl">00.</span> Your Details
+                        </h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Full Name / Business Name *</label>
+                                <input type="text" id="client-name" required class="luxury-input w-full rounded p-4 text-white font-light" placeholder="e.g. John Doe / Acme Corp">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">WhatsApp Number *</label>
+                                <input type="text" id="client-whatsapp" required class="luxury-input w-full rounded p-4 text-white font-light" placeholder="e.g. +254 712 345 678">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Email Address</label>
+                                <input type="email" id="client-email" class="luxury-input w-full rounded p-4 text-white font-light" placeholder="e.g. john@example.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="luxury-panel p-8 md:p-10 rounded-lg border-t-2 border-t-brand-gold reveal delay-200">
+                        <h3 class="text-xl font-serif font-bold mb-2 text-white flex items-center">
+                            <span class="text-brand-gold mr-3 text-2xl">01.</span> Choose Hardware
+                        </h3>
+                        <p class="text-sm text-gray-500 mb-8 pb-4 border-b border-gray-800 font-light">One-time purchase for your premium physical NFC cards.</p>
+                        
+                        <div class="space-y-4">
+                            <label class="block relative cursor-pointer group">
+                                <input type="radio" name="hardware" value="digital_business" class="peer sr-only" onchange="updateCheckout()" checked>
+                                <div class="option-card p-5 border border-gray-800 rounded bg-[#0F0F0F] hover:border-gray-600 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="radio-dot w-5 h-5 rounded-full border-2 border-gray-600 mr-4 flex-shrink-0 transition-colors duration-300"></div>
+                                        <div>
+                                            <p class="font-bold text-white group-hover:text-brand-gold transition duration-300">Digital Business Card</p>
+                                            <p class="text-xs text-gray-500 mt-1 font-light">1 Dynamic NFC Card</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-serif font-bold text-brand-gold">1,500 KES</span>
+                                </div>
+                            </label>
+
+                            <label class="block relative cursor-pointer group">
+                                <input type="radio" name="hardware" value="google_review" class="peer sr-only" onchange="updateCheckout()">
+                                <div class="option-card p-5 border border-gray-800 rounded bg-[#0F0F0F] hover:border-gray-600 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="radio-dot w-5 h-5 rounded-full border-2 border-gray-600 mr-4 flex-shrink-0 transition-colors duration-300"></div>
+                                        <div>
+                                            <p class="font-bold text-white group-hover:text-brand-gold transition duration-300">Google Review Card</p>
+                                            <p class="text-xs text-green-500/80 mt-1 italic font-light"><i class="fa-solid fa-bolt mr-1"></i> No annual subscription required</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-serif font-bold text-brand-gold">1,500 KES</span>
+                                </div>
+                            </label>
+
+                            <label class="block relative cursor-pointer group">
+                                <input type="radio" name="hardware" value="static_card" class="peer sr-only" onchange="updateCheckout()">
+                                <div class="option-card p-5 border border-gray-800 rounded bg-[#0F0F0F] hover:border-gray-600 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="radio-dot w-5 h-5 rounded-full border-2 border-gray-600 mr-4 flex-shrink-0 transition-colors duration-300"></div>
+                                        <div>
+                                            <p class="font-bold text-white group-hover:text-brand-gold transition duration-300">Static Contact Card</p>
+                                            <p class="text-xs text-green-500/80 mt-1 italic font-light"><i class="fa-solid fa-bolt mr-1"></i> No annual subscription required</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-serif font-bold text-brand-gold">1,500 KES</span>
+                                </div>
+                            </label>
+
+                            <label class="block relative cursor-pointer group">
+                                <input type="radio" name="hardware" value="starter_kit" class="peer sr-only" onchange="updateCheckout()">
+                                <div class="option-card p-5 border border-gray-800 rounded bg-[#0F0F0F] hover:border-gray-600 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="radio-dot w-5 h-5 rounded-full border-2 border-gray-600 mr-4 flex-shrink-0 transition-colors duration-300"></div>
+                                        <div>
+                                            <p class="font-bold text-white group-hover:text-brand-gold transition duration-300">Starter Kit</p>
+                                            <p class="text-xs text-gray-500 mt-1 font-light">3 Cards: 1 Dynamic, 1 Static, 1 Review</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-serif font-bold text-brand-gold">4,500 KES</span>
+                                </div>
+                            </label>
+
+                            <label class="block relative cursor-pointer group">
+                                <input type="radio" name="hardware" value="growth_kit" class="peer sr-only" onchange="updateCheckout()">
+                                <div class="option-card p-5 border border-gray-800 rounded bg-[#0F0F0F] hover:border-gray-600 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="radio-dot w-5 h-5 rounded-full border-2 border-gray-600 mr-4 flex-shrink-0 transition-colors duration-300"></div>
+                                        <div>
+                                            <p class="font-bold text-white group-hover:text-brand-gold transition duration-300">Growth Kit</p>
+                                            <p class="text-xs text-gray-500 mt-1 font-light">5 Cards: 2 Dynamic, 2 Review, 1 Static</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-serif font-bold text-brand-gold">6,750 KES</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="luxury-panel p-8 md:p-10 rounded-lg reveal delay-300 relative overflow-hidden" id="software-container">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-gold/5 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
+
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-xl font-serif font-bold text-white flex items-center z-10">
+                                <span class="text-brand-gold mr-3 text-2xl">02.</span> Choose Software
+                            </h3>
+                            <span class="text-[9px] uppercase tracking-widest bg-brand-gold/10 border border-brand-gold/50 text-brand-gold px-3 py-1 rounded font-bold z-10">Annual Only</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-8 pb-4 border-b border-gray-800 font-light z-10 relative" id="software-desc">Required cloud hosting for dynamic profiles. Link unlimited cards.</p>
+                        
+                        <div class="space-y-4 z-10 relative" id="software-options">
+                            
+                            <input type="radio" name="software" value="none" id="software-none" class="hidden">
+
+                            <label class="block relative cursor-pointer software-tier group">
+                                <input type="radio" name="software" value="individual" class="peer sr-only" onchange="updateCheckout()">
+                                <div class="option-card p-5 border border-gray-800 rounded bg-[#0F0F0F] hover:border-gray-600 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="radio-dot w-5 h-5 rounded-full border-2 border-gray-600 mr-4 flex-shrink-0 transition-colors duration-300"></div>
+                                        <div>
+                                            <p class="font-bold text-white group-hover:text-brand-gold transition duration-300">Individual</p>
+                                            <p class="text-xs text-gray-500 mt-1 font-light">Basic profile, contact sharing (VCF)</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="font-serif font-bold text-white block">1,999 KES</span>
+                                        <span class="text-[10px] text-brand-gold uppercase tracking-widest">/ Year</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="block relative cursor-pointer software-tier group">
+                                <input type="radio" name="software" value="individual_plus" class="peer sr-only" onchange="updateCheckout()" checked>
+                                <div class="option-card p-5 border border-brand-gold/30 rounded bg-[#111] hover:border-brand-gold flex items-center justify-between relative overflow-hidden">
+                                    <div class="absolute top-0 right-0 bg-brand-gold text-black text-[9px] font-bold px-3 py-1 uppercase tracking-widest rounded-bl z-20 shadow-md">Recommended</div>
+                                    
+                                    <div class="flex items-center mt-3 relative z-10">
+                                        <div class="radio-dot w-5 h-5 rounded-full border-2 border-brand-gold mr-4 flex-shrink-0 transition-colors duration-300"></div>
+                                        <div>
+                                            <p class="font-bold text-brand-gold">Individual Plus+</p>
+                                            <p class="text-xs text-gray-400 mt-1 font-light">Lead capture, Monthly Analytics, CSV</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right mt-3 relative z-10">
+                                        <span class="font-serif font-bold text-brand-gold block">3,500 KES</span>
+                                        <span class="text-[10px] text-brand-gold uppercase tracking-widest">/ Year</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="block relative cursor-pointer software-tier group">
+                                <input type="radio" name="software" value="enterprise" class="peer sr-only" onchange="updateCheckout()">
+                                <div class="option-card p-5 border border-gray-800 rounded bg-[#0F0F0F] hover:border-gray-600 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="radio-dot w-5 h-5 rounded-full border-2 border-gray-600 mr-4 flex-shrink-0 transition-colors duration-300"></div>
+                                        <div>
+                                            <p class="font-bold text-white group-hover:text-brand-gold transition duration-300">Enterprise</p>
+                                            <p class="text-xs text-gray-500 mt-1 font-light">Instant alerts, Weekly reports, Support</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="font-serif font-bold text-white block">4,200 KES</span>
+                                        <span class="text-[10px] text-brand-gold uppercase tracking-widest">/ Year</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="no-software-msg" class="hidden p-8 bg-green-900/10 border border-green-500/20 rounded-lg text-center mt-4 transition-all duration-500">
+                            <i class="fa-solid fa-check-circle text-green-500 mb-3 text-3xl drop-shadow-[0_0_10px_rgba(34,197,94,0.4)]"></i>
+                            <p class="text-green-400 font-serif font-bold text-xl">No Annual Subscription Required</p>
+                            <p class="text-sm text-gray-400 mt-2 font-light">Static and Google Review cards operate flawlessly without ongoing hosting fees.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative">
+                    <div class="luxury-panel p-8 md:p-10 rounded-lg sticky top-32 reveal delay-200">
+                        <h3 class="text-2xl font-serif font-bold mb-8 text-white border-b border-gray-800 pb-5 tracking-wide">
+                            Investment Summary
+                        </h3>
+                        
+                        <div class="space-y-6 mb-10">
+                            <div class="flex justify-between items-start transition-all duration-300">
+                                <div>
+                                    <p class="text-sm font-bold text-gray-300 tracking-wide">Hardware <span class="text-[9px] text-gray-500 font-normal uppercase tracking-widest ml-2">(One-Time)</span></p>
+                                    <p class="text-xs text-gray-400 mt-1.5 font-light" id="summary-hardware-name">Digital Business Card</p>
+                                </div>
+                                <span class="font-serif text-white text-lg" id="summary-hardware-price">1,500 KES</span>
+                            </div>
+
+                            <div class="flex justify-between items-start transition-all duration-300" id="summary-software-row">
+                                <div>
+                                    <p class="text-sm font-bold text-brand-gold tracking-wide">Software <span class="text-[9px] text-brand-gold/60 font-normal uppercase tracking-widest ml-2">(Annually)</span></p>
+                                    <p class="text-xs text-brand-gold/80 mt-1.5 font-light" id="summary-software-name">Individual Plus+</p>
+                                </div>
+                                <span class="font-serif text-brand-gold text-lg" id="summary-software-price">3,500 KES</span>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-800 pt-8 mb-10">
+                            <div class="flex justify-between items-end mb-2">
+                                <span class="text-gray-400 text-sm uppercase tracking-widest font-bold">Total Due Today</span>
+                                <span class="text-4xl font-serif font-bold gold-gradient-text" id="summary-total">5,000 KES</span>
+                            </div>
+                            <p class="text-[11px] text-gray-500 text-right font-light italic" id="renewal-note">Renews annually at 3,500 KES</p>
+                        </div>
+
+                        <button onclick="checkoutWhatsApp()" class="w-full py-5 bg-brand-gold hover:bg-[#b59858] text-black font-bold uppercase tracking-widest text-sm rounded flex items-center justify-center shadow-[0_0_20px_rgba(201,169,98,0.3)] hover:shadow-[0_0_30px_rgba(201,169,98,0.5)] transform transition duration-500 hover:-translate-y-1 group">
+                            <i class="fa-brands fa-whatsapp text-xl mr-3 group-hover:scale-110 transition duration-300"></i> Finalize via WhatsApp
+                        </button>
+                        
+                        <p class="text-xs text-gray-600 text-center mt-6 font-light">
+                            <i class="fa-solid fa-lock mr-1.5 text-gray-500"></i> Secure encryption. Payment details sent upon confirmation.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-[#050505] border-t border-gray-900 pt-16 pb-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-gray-600 font-serif tracking-widest text-xs uppercase">© 2025 Skena Luxury Networking. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            const logo = document.getElementById('nav-logo');
+            if (window.scrollY > 50) {
+                nav.classList.remove('py-4');
+                nav.classList.add('py-2', 'shadow-2xl');
+                logo.classList.remove('h-32');
+                logo.classList.add('h-16');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2', 'shadow-2xl');
+                logo.classList.add('h-32');
+                logo.classList.remove('h-16');
+            }
+        });
+
+        // Intersection Observer for scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        setTimeout(() => { entry.target.style.opacity = '1'; }, 1000);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+            
+            updateCheckout(); // Run calculation on load
+        });
+
+        // Pricing Maps
+        const hardwarePrices = {
+            'digital_business': { name: 'Digital Business Card', price: 1500 },
+            'google_review': { name: 'Google Review Card', price: 1500 },
+            'static_card': { name: 'Static Contact Card', price: 1500 },
+            'starter_kit': { name: 'Starter Kit', price: 4500 },
+            'growth_kit': { name: 'Growth Kit', price: 6750 }
+        };
+
+        const softwarePrices = {
+            'none': { name: 'None Required', price: 0 },
+            'individual': { name: 'Individual Tier', price: 1999 },
+            'individual_plus': { name: 'Individual Plus+ Tier', price: 3500 },
+            'enterprise': { name: 'Enterprise Tier', price: 4200 }
+        };
+
+        let lastSelectedSoftware = 'individual_plus';
+
+        function updateCheckout() {
+            const hwKey = document.querySelector('input[name="hardware"]:checked').value;
+            let swKey = document.querySelector('input[name="software"]:checked').value;
+            
+            const isNoSubRequired = (hwKey === 'google_review' || hwKey === 'static_card');
+
+            // UI Logic for Software Section
+            const swContainer = document.getElementById('software-options');
+            const noSwMsg = document.getElementById('no-software-msg');
+            const swTiers = document.querySelectorAll('.software-tier');
+
+            if (isNoSubRequired) {
+                // If they chose static/review, disable software choices
+                swTiers.forEach(tier => tier.classList.add('radio-disabled'));
+                swContainer.classList.add('hidden');
+                noSwMsg.classList.remove('hidden');
+                
+                // Force "none" selection internally
+                document.getElementById('software-none').checked = true;
+                swKey = 'none';
+            } else {
+                // Re-enable software choices if they switch back to a dynamic product
+                swTiers.forEach(tier => tier.classList.remove('radio-disabled'));
+                swContainer.classList.remove('hidden');
+                noSwMsg.classList.add('hidden');
+                
+                // Restore last selection if it was 'none'
+                if (swKey === 'none') {
+                    document.querySelector(`input[name="software"][value="${lastSelectedSoftware}"]`).checked = true;
+                    swKey = lastSelectedSoftware;
+                } else {
+                    lastSelectedSoftware = swKey; // Keep track of what they explicitly clicked
+                }
+            }
+
+            // Calculation
+            const hw = hardwarePrices[hwKey];
+            const sw = softwarePrices[swKey];
+            const total = hw.price + sw.price;
+
+            // Update Summary UI
+            document.getElementById('summary-hardware-name').innerText = hw.name;
+            document.getElementById('summary-hardware-price').innerText = hw.price.toLocaleString() + ' KES';
+            
+            const swRow = document.getElementById('summary-software-row');
+            if (sw.price === 0) {
+                swRow.classList.add('opacity-40');
+                document.getElementById('summary-software-name').innerText = 'Not Required';
+                document.getElementById('summary-software-price').innerText = '0 KES';
+                document.getElementById('renewal-note').innerText = 'No annual renewal fees necessary.';
+            } else {
+                swRow.classList.remove('opacity-40');
+                document.getElementById('summary-software-name').innerText = sw.name;
+                document.getElementById('summary-software-price').innerText = sw.price.toLocaleString() + ' KES';
+                document.getElementById('renewal-note').innerText = `Renews annually at ${sw.price.toLocaleString()} KES`;
+            }
+
+            // Animate total change
+            const totalEl = document.getElementById('summary-total');
+            totalEl.style.opacity = 0;
+            setTimeout(() => {
+                totalEl.innerText = total.toLocaleString() + ' KES';
+                totalEl.style.opacity = 1;
+                totalEl.style.transition = 'opacity 0.4s ease';
+            }, 200);
+        }
+
+        function checkoutWhatsApp() {
+            const name = document.getElementById('client-name').value.trim();
+            const whatsapp = document.getElementById('client-whatsapp').value.trim();
+            const email = document.getElementById('client-email').value.trim() || 'Not provided';
+            
+            if (!name || !whatsapp) {
+                alert('Please provide your name and WhatsApp number to continue your order.');
+                // Add highlight to missing fields
+                if(!name) document.getElementById('client-name').classList.add('border-red-500');
+                if(!whatsapp) document.getElementById('client-whatsapp').classList.add('border-red-500');
+                return;
+            }
+
+            const hwKey = document.querySelector('input[name="hardware"]:checked').value;
+            const swKey = document.querySelector('input[name="software"]:checked').value;
+            
+            const hwName = hardwarePrices[hwKey].name;
+            const swName = softwarePrices[swKey].name;
+            const total = document.getElementById('summary-total').innerText;
+
+            let msg = `*💎 NEW SKENA ORDER*%0A%0A`;
+            msg += `*Client Info:*%0A`;
+            msg += `Name: ${name}%0A`;
+            msg += `WhatsApp: ${whatsapp}%0A`;
+            msg += `Email: ${email}%0A%0A`;
+            msg += `*Order Configuration:*%0A`;
+            msg += `Hardware: ${hwName}%0A`;
+            msg += `Software Plan: ${swName}%0A`;
+            msg += `%0A*Total Due Today: ${total}*%0A%0A`;
+            msg += `I am ready to finalize my premium order.`;
+
+            window.open(`https://wa.me/254113895800?text=${msg}`, '_blank');
+        }
+
+        // Remove red border on input
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('border-red-500');
+            });
+        });
+    </script>
+</body>
+</html>

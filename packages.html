@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packages | Skena</title>
+    
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0A0A0A',
+                            panel: '#1A1A1A',
+                            gold: '#C9A962',
+                            text: '#F5F5F5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .luxury-panel { 
+            background: #1A1A1A; 
+            border: 1px solid rgba(201, 169, 98, 0.2); 
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .luxury-panel:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            border-color: rgba(201, 169, 98, 0.6);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(to right, #C9A962, #E8D399, #C9A962);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-text font-sans selection:bg-brand-gold selection:text-black">
+
+    <nav id="main-nav" class="fixed w-full z-50 top-0 border-b border-gray-800 bg-brand-dark/95 backdrop-blur-md transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-6">
+            <a href="index.html" class="flex items-center space-x-2">
+                <img id="nav-logo" src="logo.png" alt="Skena Logo" class="h-32 w-auto object-contain transition-all duration-300" onerror="this.style.display='none'">
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold font-serif tracking-widest text-white">SKENA</span>
+                    <span class="text-[10px] text-brand-gold uppercase tracking-widest">The Future of Networking</span>
+                </div>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 items-center text-sm tracking-wide">
+                <a href="index.html" class="text-gray-400 hover:text-brand-gold transition">Home</a>
+                <a href="products.html" class="text-gray-400 hover:text-brand-gold transition">Cards</a>
+                <a href="packages.html" class="text-brand-gold font-semibold border-b border-brand-gold pb-1">Packages</a>
+                <a href="order-form.html" class="text-gray-400 hover:text-brand-gold transition"><i class="fa-solid fa-clipboard-list mr-1"></i> Order Form</a>
+                <a href="faq.html" class="text-gray-400 hover:text-brand-gold transition">FAQ</a>
+                <a href="checkout.html" class="bg-brand-gold text-black px-6 py-2 rounded font-bold hover:bg-yellow-600 transition">Order Now</a>
+            </div>
+            
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-2xl text-brand-gold"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        
+        <div id="mobile-menu" class="hidden bg-brand-panel p-4 flex flex-col space-y-4 border-t border-gray-800">
+            <a href="index.html" class="py-2 text-gray-300">Home</a>
+            <a href="products.html" class="py-2 text-gray-300">Cards</a>
+            <a href="packages.html" class="py-2 text-brand-gold font-bold">Packages</a>
+            <a href="order-form.html" class="py-2 text-gray-300">Order Form</a>
+            <a href="faq.html" class="py-2 text-gray-300">FAQ</a>
+            <a href="checkout.html" class="py-2 text-brand-gold font-bold">Order Now</a>
+        </div>
+    </nav>
+
+    <main class="pt-40 pb-24">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="luxury-panel rounded-lg p-10 md:p-12 mb-32 text-center max-w-4xl mx-auto relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-gold to-transparent opacity-50"></div>
+                
+                <h1 class="text-3xl md:text-5xl font-serif font-bold mb-6 text-white tracking-wide">
+                    💎 <span class="gold-gradient-text">ONE PROFILE, UNLIMITED CARDS</span>
+                </h1>
+                
+                <p class="text-gray-300 text-lg md:text-xl leading-relaxed mb-6 font-light">
+                    Your subscription covers your digital profile (the website people see when they tap your card). You can link <strong class="text-white">unlimited physical cards</strong> to the same profile at no extra cost.
+                </p>
+                
+                <div class="bg-black/50 border border-brand-gold/30 p-6 rounded text-left inline-block mt-4">
+                    <p class="text-brand-gold font-serif text-xl italic mb-2">The Skena Advantage:</p>
+                    <p class="text-sm text-gray-400">Buy 5 business cards for your team (KES 7,500 hardware). Link them all to one company profile (KES 3,500/year software). <br><span class="text-white font-bold mt-2 block">Total annual cost: KES 3,500 — not KES 17,500!</span></p>
+                </div>
+            </div>
+
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif font-bold mb-4 text-white">Software Subscriptions</h2>
+                <p class="text-brand-gold tracking-widest text-sm uppercase">100% Annual Commitment. No Monthly Fees.</p>
+                <p class="text-gray-400 text-sm mt-2 italic">*Note: Standalone Static & Google Review Cards do not require an annual subscription.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 mb-32 items-center">
+                
+                <div class="luxury-panel p-10 rounded-lg flex flex-col h-full opacity-90">
+                    <h3 class="text-2xl font-serif font-bold mb-2 text-white">Individual</h3>
+                    <p class="text-sm text-gray-400 mb-6 italic border-b border-gray-800 pb-4">Best for: Business owners sharing contact details</p>
+                    
+                    <div class="mb-8">
+                        <span class="text-4xl font-bold text-white">1,999 <span class="text-lg text-gray-500 font-normal">KES</span></span>
+                        <span class="block text-xs text-brand-gold mt-1 uppercase tracking-wider">/ Year</span>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-10 text-sm text-gray-300 flex-grow">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>Hosted digital profile</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>Unlimited self-service dashboard updates</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>1 professional design refresh every 2 months</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>Contact sharing (VCF)</span>
+                        </li>
+                        <li class="flex items-start opacity-40">
+                            <i class="fa-solid fa-xmark mt-1 mr-3"></i>
+                            <span>NO lead capture</span>
+                        </li>
+                        <li class="flex items-start opacity-40">
+                            <i class="fa-solid fa-xmark mt-1 mr-3"></i>
+                            <span>NO analytics</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="checkout.html" class="w-full py-4 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-black rounded transition font-semibold text-center tracking-wide">
+                        Select Plan
+                    </a>
+                </div>
+
+                <div class="luxury-panel p-12 rounded-lg flex flex-col relative transform scale-105 z-10 border-brand-gold shadow-[0_0_30px_rgba(201,169,98,0.15)] bg-[#111]">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brand-gold text-black text-xs font-bold px-4 py-1 rounded-sm uppercase tracking-widest shadow-lg">
+                        Most Popular
+                    </div>
+                    
+                    <h3 class="text-3xl font-serif font-bold mb-2 gold-gradient-text">Individual Plus+</h3>
+                    <p class="text-sm text-gray-400 mb-6 italic border-b border-gray-800 pb-4">Best for: Sales professionals, networkers</p>
+                    
+                    <div class="mb-8">
+                        <span class="text-5xl font-bold text-white">3,500 <span class="text-xl text-gray-500 font-normal">KES</span></span>
+                        <span class="block text-xs text-brand-gold mt-1 uppercase tracking-wider">/ Year</span>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-10 text-sm text-gray-300 flex-grow">
+                        <li class="flex items-start font-medium text-white">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>Everything in Individual</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>Lead capture form (collect names, emails, phones)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>Monthly analytics report</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>Download leads as CSV</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="checkout.html" class="w-full py-4 bg-brand-gold text-black hover:bg-[#b59858] rounded transition font-bold text-center tracking-wide shadow-lg">
+                        Select Plan
+                    </a>
+                </div>
+
+                <div class="luxury-panel p-10 rounded-lg flex flex-col h-full opacity-90">
+                    <h3 class="text-2xl font-serif font-bold mb-2 text-white">Enterprise</h3>
+                    <p class="text-sm text-gray-400 mb-6 italic border-b border-gray-800 pb-4">Best for: Businesses needing instant follow-up</p>
+                    
+                    <div class="mb-8">
+                        <span class="text-4xl font-bold text-white">4,200 <span class="text-lg text-gray-500 font-normal">KES</span></span>
+                        <span class="block text-xs text-brand-gold mt-1 uppercase tracking-wider">/ Year</span>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-10 text-sm text-gray-300 flex-grow">
+                        <li class="flex items-start font-medium text-white">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>Everything in Individual Plus+</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>Instant email alerts when card is tapped</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>Weekly lead summary reports</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="checkout.html" class="w-full py-4 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-black rounded transition font-semibold text-center tracking-wide">
+                        Select Plan
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="max-w-5xl mx-auto">
+                <h3 class="text-3xl font-serif font-bold mb-8 text-center text-white">Example Investment Scenarios</h3>
+                
+                <div class="overflow-x-auto rounded-lg border border-gray-800">
+                    <table class="w-full text-left text-sm whitespace-nowrap">
+                        <thead class="bg-brand-panel border-b border-brand-gold/30">
+                            <tr>
+                                <th class="p-6 text-brand-gold font-serif text-lg">Scenario</th>
+                                <th class="p-6 text-brand-gold font-serif text-lg">Hardware (One-Time)</th>
+                                <th class="p-6 text-brand-gold font-serif text-lg">Software (Annual)</th>
+                                <th class="p-6 text-white font-serif text-lg">First Year Total</th>
+                                <th class="p-6 text-gray-400 font-serif text-lg border-l border-gray-800">Annual Renewal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-800 bg-[#0F0F0F]">
+                            <tr class="hover:bg-brand-panel transition">
+                                <td class="p-6 font-semibold text-white">Solo Professional</td>
+                                <td class="p-6 text-gray-300">1 Business Card (1,500 KES)</td>
+                                <td class="p-6 text-gray-300">Individual Plus+ (3,500 KES)</td>
+                                <td class="p-6 font-bold text-white">5,000 KES</td>
+                                <td class="p-6 text-gray-500 border-l border-gray-800">3,500 KES</td>
+                            </tr>
+                            <tr class="hover:bg-brand-panel transition">
+                                <td class="p-6 font-semibold text-white">Hybrid Networker</td>
+                                <td class="p-6 text-gray-300">Starter Kit (4,500 KES)</td>
+                                <td class="p-6 text-gray-300">Individual Plus+ (3,500 KES)</td>
+                                <td class="p-6 font-bold text-white">8,000 KES</td>
+                                <td class="p-6 text-gray-500 border-l border-gray-800">3,500 KES</td>
+                            </tr>
+                            <tr class="hover:bg-brand-panel transition">
+                                <td class="p-6 font-semibold text-white">Team Essentials</td>
+                                <td class="p-6 text-gray-300">Growth Kit (6,750 KES)</td>
+                                <td class="p-6 text-gray-300">Enterprise (4,200 KES)</td>
+                                <td class="p-6 font-bold text-brand-gold">10,950 KES</td>
+                                <td class="p-6 text-gray-500 border-l border-gray-800">4,200 KES</td>
+                            </tr>
+                            <tr class="hover:bg-brand-panel transition">
+                                <td class="p-6 font-semibold text-white">Review Collector</td>
+                                <td class="p-6 text-gray-300">1 Google Review Card (1,500 KES)</td>
+                                <td class="p-6 text-gray-300">None Required (0 KES)</td>
+                                <td class="p-6 font-bold text-white">1,500 KES</td>
+                                <td class="p-6 text-brand-gold border-l border-gray-800">0 KES</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-[#050505] border-t border-gray-900 pt-16 pb-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-gray-600 font-serif tracking-widest text-sm uppercase">© 2025 Skena Luxury Networking. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/254113895800" target="_blank" class="fixed bottom-6 right-6 w-14 h-14 bg-[#C9A962] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(201,169,98,0.4)] hover:scale-110 transition z-40">
+        <i class="fa-brands fa-whatsapp text-black text-3xl"></i>
+    </a>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            const logo = document.getElementById('nav-logo');
+            if (window.scrollY > 50) {
+                nav.classList.remove('py-4');
+                nav.classList.add('py-2', 'shadow-2xl');
+                logo.classList.remove('h-32');
+                logo.classList.add('h-16');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2', 'shadow-2xl');
+                logo.classList.add('h-32');
+                logo.classList.remove('h-16');
+            }
+        });
+    </script>
+
+</body>
+</html>

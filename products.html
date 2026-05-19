@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware Collection | Skena</title>
+    
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0A0A0A',
+                            panel: '#1A1A1A',
+                            gold: '#C9A962',
+                            text: '#F5F5F5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .luxury-panel { 
+            background: #1A1A1A; 
+            border: 1px solid rgba(201, 169, 98, 0.15); 
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .luxury-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border-color: rgba(201, 169, 98, 0.4);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(to right, #C9A962, #E8D399, #C9A962);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* 3D Card Animation */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .group:hover .flip-target { transform: rotateY(180deg); }
+        .flip-target { transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+        /* Smooth Reveal Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-text font-sans selection:bg-brand-gold selection:text-black antialiased overflow-x-hidden">
+
+    <nav id="main-nav" class="fixed w-full z-50 top-0 border-b border-gray-800 bg-brand-dark/95 backdrop-blur-md transition-all duration-500 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-6">
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <img id="nav-logo" src="logo.png" alt="Skena Logo" class="h-32 w-auto object-contain transition-all duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold font-serif tracking-widest text-white transition duration-500 group-hover:text-brand-gold">SKENA</span>
+                    <span class="text-[10px] text-brand-gold uppercase tracking-widest">The Future of Networking</span>
+                </div>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 items-center text-sm tracking-wide">
+                <a href="index.html" class="text-gray-400 hover:text-brand-gold transition duration-500">Home</a>
+                <a href="products.html" class="text-brand-gold font-bold border-b border-brand-gold pb-1">Cards</a>
+                <a href="packages.html" class="text-gray-400 hover:text-brand-gold transition duration-500">Packages</a>
+                <a href="order-form.html" class="text-gray-400 hover:text-brand-gold transition duration-500"><i class="fa-solid fa-clipboard-list mr-1"></i> Order Form</a>
+                <a href="faq.html" class="text-gray-400 hover:text-brand-gold transition duration-500">FAQ</a>
+                <a href="checkout.html" class="bg-brand-gold text-black px-6 py-2 rounded font-bold hover:bg-[#b59858] transition duration-500 shadow-[0_0_15px_rgba(201,169,98,0.3)]">Order Now</a>
+            </div>
+            
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-2xl text-brand-gold"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        
+        <div id="mobile-menu" class="hidden bg-brand-panel p-4 flex flex-col space-y-4 border-t border-gray-800 absolute w-full left-0 shadow-2xl">
+            <a href="index.html" class="py-2 text-gray-300">Home</a>
+            <a href="products.html" class="py-2 text-brand-gold font-bold">Cards</a>
+            <a href="packages.html" class="py-2 text-gray-300">Packages</a>
+            <a href="order-form.html" class="py-2 text-gray-300">Order Form</a>
+            <a href="faq.html" class="py-2 text-gray-300">FAQ</a>
+            <a href="checkout.html" class="py-2 text-gray-300">Order Now</a>
+        </div>
+    </nav>
+
+    <main class="pt-40 pb-24">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="text-center mb-24 reveal">
+                <h2 class="text-xs text-brand-gold tracking-widest uppercase mb-3 font-bold">Precision Crafted</h2>
+                <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6 text-white">Hardware Collection</h1>
+                <p class="text-gray-400 text-lg font-light tracking-wide max-w-2xl mx-auto">Premium physical NFC cards engineered to make a lasting impression. All hardware is a one-time investment.</p>
+            </div>
+
+            <h3 class="text-2xl font-serif font-bold mb-10 text-brand-gold border-b border-gray-800 pb-4 reveal delay-100">Individual Cards</h3>
+            
+            <div class="grid lg:grid-cols-3 gap-8 mb-24">
+                
+                <div class="luxury-panel rounded-xl p-8 flex flex-col reveal delay-100 relative group">
+                    <div class="perspective-1000 h-48 mb-8 w-full flex justify-center mt-4">
+                        <div class="w-72 h-44 relative transform-style-3d flip-target cursor-pointer">
+                            <div class="absolute inset-0 backface-hidden shadow-2xl">
+                                <img src="card-front.png" alt="Business Card Front" class="w-full h-full object-contain rounded-lg" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-[#111] flex items-center justify-center border border-gray-800 rounded-lg text-brand-gold font-serif text-xl\'>DYNAMIC FRONT</div>'">
+                            </div>
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 shadow-2xl">
+                                <img src="card-back.png" alt="Business Card Back" class="w-full h-full object-contain rounded-lg" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-[#050505] flex items-center justify-center border border-[#C9A962] rounded-lg text-white font-serif text-xl\'>DYNAMIC BACK</div>'">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-grow text-center">
+                        <h4 class="text-2xl font-serif font-bold text-white mb-2">Digital Business Card</h4>
+                        <p class="text-xs text-brand-gold uppercase tracking-widest mb-4 font-bold">Dynamic Profile</p>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed mb-6">Our flagship interactive card. Tap to open your fully hosted digital portfolio, capture client leads, and share social links.</p>
+                        
+                        <div class="bg-[#0A0A0A] p-4 rounded border border-gray-800 mb-6 text-left">
+                            <p class="text-xs text-gray-500 font-bold mb-2 uppercase tracking-widest"><i class="fa-solid fa-circle-info text-brand-gold mr-1"></i> Note</p>
+                            <p class="text-xs text-gray-400 font-light">Requires an active Annual Software Subscription to host your dynamic online profile.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-800 pt-6 mt-auto flex justify-between items-center">
+                        <span class="text-2xl font-serif font-bold text-white">1,500 <span class="text-sm text-gray-500 font-normal">KES</span></span>
+                        <a href="checkout.html" class="px-5 py-2 bg-brand-gold/10 text-brand-gold hover:bg-brand-gold hover:text-black border border-brand-gold/50 rounded transition duration-300 font-bold text-xs uppercase tracking-wider">Select</a>
+                    </div>
+                </div>
+
+                <div class="luxury-panel rounded-xl p-8 flex flex-col reveal delay-200 relative group">
+                    <div class="absolute top-0 right-0 bg-green-500/20 text-green-400 text-[9px] font-bold px-3 py-1 uppercase tracking-widest rounded-bl border-b border-l border-green-500/30">No Subscription Needed</div>
+                    
+                    <div class="perspective-1000 h-48 mb-8 w-full flex justify-center mt-4">
+                        <div class="w-72 h-44 relative transform-style-3d flip-target cursor-pointer">
+                            <div class="absolute inset-0 backface-hidden shadow-2xl">
+                                <img src="review-Card-front.png" alt="Review Card Front" class="w-full h-full object-contain rounded-lg" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-[#111] flex items-center justify-center border border-gray-800 rounded-lg text-brand-gold font-serif text-xl\'>REVIEW FRONT</div>'">
+                            </div>
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 shadow-2xl">
+                                <img src="review-card-back.png" alt="Review Card Back" class="w-full h-full object-contain rounded-lg" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-[#050505] flex items-center justify-center border border-[#C9A962] rounded-lg text-white font-serif text-xl\'>REVIEW BACK</div>'">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-grow text-center">
+                        <h4 class="text-2xl font-serif font-bold text-white mb-2">Google Review Card</h4>
+                        <p class="text-xs text-brand-gold uppercase tracking-widest mb-4 font-bold">Local SEO Booster</p>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed mb-6">Skyrocket your online reputation. One tap directs clients straight to your business's Google Review submission page.</p>
+                        
+                        <div class="bg-green-900/10 p-4 rounded border border-green-500/20 mb-6 text-left">
+                            <p class="text-xs text-green-500 font-bold mb-2 uppercase tracking-widest"><i class="fa-solid fa-check-circle mr-1"></i> Zero Ongoing Fees</p>
+                            <p class="text-xs text-gray-400 font-light">Functions independently. Does not require a Skena software subscription to operate.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-800 pt-6 mt-auto flex justify-between items-center">
+                        <span class="text-2xl font-serif font-bold text-white">1,500 <span class="text-sm text-gray-500 font-normal">KES</span></span>
+                        <a href="checkout.html" class="px-5 py-2 bg-brand-gold/10 text-brand-gold hover:bg-brand-gold hover:text-black border border-brand-gold/50 rounded transition duration-300 font-bold text-xs uppercase tracking-wider">Select</a>
+                    </div>
+                </div>
+
+                <div class="luxury-panel rounded-xl p-8 flex flex-col reveal delay-300 relative group">
+                    <div class="absolute top-0 right-0 bg-green-500/20 text-green-400 text-[9px] font-bold px-3 py-1 uppercase tracking-widest rounded-bl border-b border-l border-green-500/30">No Subscription Needed</div>
+                    
+                    <div class="perspective-1000 h-48 mb-8 w-full flex justify-center mt-4">
+                        <div class="w-72 h-44 relative transform-style-3d flip-target cursor-pointer">
+                            <div class="absolute inset-0 backface-hidden shadow-2xl">
+                                <div class="w-full h-full bg-[#151515] flex flex-col items-center justify-center border border-gray-700 rounded-lg">
+                                    <i class="fa-solid fa-address-book text-4xl text-gray-500 mb-3"></i>
+                                    <span class="text-white font-serif text-lg tracking-widest">STATIC CARD</span>
+                                </div>
+                            </div>
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 shadow-2xl">
+                                <div class="w-full h-full bg-[#050505] flex items-center justify-center border border-gray-600 rounded-lg">
+                                    <i class="fa-solid fa-wifi text-3xl text-gray-700"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-grow text-center">
+                        <h4 class="text-2xl font-serif font-bold text-white mb-2">Static Contact Card</h4>
+                        <p class="text-xs text-gray-400 uppercase tracking-widest mb-4 font-bold">Offline Networking</p>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed mb-6">Direct-to-phone contact sharing (.VCF file). Works instantly without requiring the internet. Perfect for remote areas or fast connections.</p>
+                        
+                        <div class="bg-green-900/10 p-4 rounded border border-green-500/20 mb-6 text-left">
+                            <p class="text-xs text-green-500 font-bold mb-2 uppercase tracking-widest"><i class="fa-solid fa-check-circle mr-1"></i> Zero Ongoing Fees</p>
+                            <p class="text-xs text-gray-400 font-light">Functions completely offline. Does not require a Skena software subscription.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-800 pt-6 mt-auto flex justify-between items-center">
+                        <span class="text-2xl font-serif font-bold text-white">1,500 <span class="text-sm text-gray-500 font-normal">KES</span></span>
+                        <a href="checkout.html" class="px-5 py-2 bg-brand-gold/10 text-brand-gold hover:bg-brand-gold hover:text-black border border-brand-gold/50 rounded transition duration-300 font-bold text-xs uppercase tracking-wider">Select</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-32 reveal">
+                <h3 class="text-2xl font-serif font-bold mb-10 text-brand-gold border-b border-gray-800 pb-4">Curated Hardware Kits</h3>
+                
+                <div class="grid md:grid-cols-2 gap-10">
+                    
+                    <div class="luxury-panel p-10 rounded-xl relative overflow-hidden group">
+                        <div class="absolute -right-10 -top-10 text-[150px] text-gray-800/20 group-hover:text-brand-gold/5 transition duration-700 pointer-events-none">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        
+                        <h4 class="text-3xl font-serif font-bold text-white mb-2">Starter Kit</h4>
+                        <p class="text-sm text-gray-400 font-light mb-8">The essential hybrid networking arsenal.</p>
+                        
+                        <div class="flex items-end mb-8">
+                            <span class="text-5xl font-bold gold-gradient-text mr-2">4,500</span>
+                            <span class="text-gray-500 uppercase tracking-widest text-sm mb-1">KES <span class="text-[10px] ml-1">(One-Time)</span></span>
+                        </div>
+                        
+                        <ul class="space-y-4 text-gray-300 font-light mb-10 border-t border-gray-800 pt-8">
+                            <li class="flex items-center">
+                                <span class="w-8 h-8 rounded-full bg-brand-gold/10 flex items-center justify-center mr-4 border border-brand-gold/30 text-brand-gold font-bold">1</span>
+                                <div>
+                                    <p class="font-bold text-white">Dynamic Business Card</p>
+                                    <p class="text-xs text-gray-500">Requires software subscription</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center mr-4 border border-gray-700 text-white font-bold">1</span>
+                                <div>
+                                    <p class="font-bold text-white">Static Contact Card</p>
+                                    <p class="text-xs text-gray-500">Subscription-free</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-8 h-8 rounded-full bg-green-900/20 flex items-center justify-center mr-4 border border-green-500/30 text-green-500 font-bold">1</span>
+                                <div>
+                                    <p class="font-bold text-white">Google Review Card</p>
+                                    <p class="text-xs text-gray-500">Subscription-free</p>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <a href="checkout.html" class="block w-full py-4 text-center border border-gray-600 hover:border-brand-gold text-white hover:text-brand-gold rounded font-bold uppercase tracking-widest text-xs transition duration-300">Select Starter Kit</a>
+                    </div>
+
+                    <div class="luxury-panel p-10 rounded-xl relative overflow-hidden group border-brand-gold/30 shadow-[0_0_20px_rgba(201,169,98,0.1)]">
+                        <div class="absolute top-0 right-0 bg-brand-gold text-black text-[10px] font-bold px-4 py-1.5 uppercase tracking-widest rounded-bl z-20 shadow-md">Best Value</div>
+                        <div class="absolute -right-10 -top-10 text-[150px] text-gray-800/20 group-hover:text-brand-gold/10 transition duration-700 pointer-events-none z-0">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                        
+                        <div class="relative z-10">
+                            <h4 class="text-3xl font-serif font-bold text-brand-gold mb-2">Growth Kit</h4>
+                            <p class="text-sm text-gray-400 font-light mb-8">Comprehensive toolset for expanding businesses.</p>
+                            
+                            <div class="flex items-end mb-8">
+                                <span class="text-5xl font-bold text-white mr-2">6,750</span>
+                                <span class="text-gray-500 uppercase tracking-widest text-sm mb-1">KES <span class="text-[10px] ml-1">(One-Time)</span></span>
+                            </div>
+                            
+                            <ul class="space-y-4 text-gray-300 font-light mb-10 border-t border-gray-800 pt-8">
+                                <li class="flex items-center">
+                                    <span class="w-8 h-8 rounded-full bg-brand-gold/20 flex items-center justify-center mr-4 border border-brand-gold/50 text-brand-gold font-bold">2</span>
+                                    <div>
+                                        <p class="font-bold text-white">Dynamic Business Cards</p>
+                                        <p class="text-xs text-gray-500">Link both to 1 profile (1 subscription)</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-8 h-8 rounded-full bg-green-900/20 flex items-center justify-center mr-4 border border-green-500/30 text-green-500 font-bold">2</span>
+                                    <div>
+                                        <p class="font-bold text-white">Google Review Cards</p>
+                                        <p class="text-xs text-gray-500">Place at multiple checkout points</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center mr-4 border border-gray-700 text-white font-bold">1</span>
+                                    <div>
+                                        <p class="font-bold text-white">Static Contact Card</p>
+                                        <p class="text-xs text-gray-500">For offline emergencies</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            
+                            <a href="checkout.html" class="block w-full py-4 text-center bg-brand-gold hover:bg-[#b59858] text-black rounded font-bold uppercase tracking-widest text-xs transition duration-300 shadow-[0_0_15px_rgba(201,169,98,0.2)]">Select Growth Kit</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="mt-24 bg-[#0A0A0A] border border-brand-gold/20 p-10 rounded-xl text-center reveal">
+                <i class="fa-solid fa-cloud text-3xl text-brand-gold mb-4"></i>
+                <h3 class="text-2xl font-serif font-bold text-white mb-3">Don't Forget Your Software Plan</h3>
+                <p class="text-gray-400 font-light max-w-2xl mx-auto mb-8">
+                    If you are purchasing a <strong class="text-white">Dynamic Business Card</strong> or a kit containing one, you will select your accompanying annual software subscription during checkout.
+                </p>
+                <div class="flex justify-center gap-4">
+                    <a href="packages.html" class="px-6 py-3 border border-gray-600 hover:border-brand-gold text-gray-300 hover:text-white rounded text-sm uppercase tracking-widest transition">View Software Tiers</a>
+                    <a href="checkout.html" class="px-6 py-3 bg-brand-gold text-black rounded font-bold text-sm uppercase tracking-widest hover:bg-[#b59858] transition">Go To Checkout</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-[#050505] border-t border-gray-900 pt-16 pb-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-gray-600 font-serif tracking-widest text-xs uppercase">© 2025 Skena Luxury Networking. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/254113895800" target="_blank" class="fixed bottom-6 right-6 w-14 h-14 bg-[#C9A962] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(201,169,98,0.4)] hover:scale-110 transition duration-500 z-40">
+        <i class="fa-brands fa-whatsapp text-black text-3xl"></i>
+    </a>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            const logo = document.getElementById('nav-logo');
+            if (window.scrollY > 50) {
+                nav.classList.remove('py-4');
+                nav.classList.add('py-2', 'shadow-2xl');
+                logo.classList.remove('h-32');
+                logo.classList.add('h-16');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2', 'shadow-2xl');
+                logo.classList.add('h-32');
+                logo.classList.remove('h-16');
+            }
+        });
+
+        // Intersection Observer for scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        setTimeout(() => { entry.target.style.opacity = '1'; }, 1000);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

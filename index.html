@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skena | The Future of Networking is Here</title>
+    <meta name="description" content="Skena Digital Business Cards. Share instantly via NFC and grow your business.">
+    
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0A0A0A',
+                            panel: '#1A1A1A',
+                            gold: '#C9A962',
+                            text: '#F5F5F5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .luxury-panel { 
+            background: #1A1A1A; 
+            border: 1px solid rgba(201, 169, 98, 0.15); 
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .luxury-panel:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            border-color: rgba(201, 169, 98, 0.5);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(to right, #C9A962, #E8D399, #C9A962);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+        
+        /* 3D Card Animation */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .group:hover .flip-target { transform: rotateY(180deg); }
+        .flip-target { transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+        /* Smooth Reveal Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0;
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-text font-sans selection:bg-brand-gold selection:text-black antialiased overflow-x-hidden">
+
+    <nav id="main-nav" class="fixed w-full z-50 top-0 border-b border-gray-800 bg-brand-dark/95 backdrop-blur-md transition-all duration-500 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-6">
+            <a href="index.html" class="flex items-center space-x-2">
+                <img id="nav-logo" src="logo.png" alt="Skena Logo" class="h-32 w-auto object-contain transition-all duration-500" onerror="this.style.display='none'">
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold font-serif tracking-widest text-white">SKENA</span>
+                    <span class="text-[10px] text-brand-gold uppercase tracking-widest">The Future of Networking</span>
+                </div>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 items-center text-sm tracking-wide">
+                <a href="index.html" class="text-brand-gold font-semibold border-b border-brand-gold pb-1">Home</a>
+                <a href="products.html" class="text-gray-400 hover:text-brand-gold transition duration-500">Cards</a>
+                <a href="packages.html" class="text-gray-400 hover:text-brand-gold transition duration-500">Packages</a>
+                <a href="order-form.html" class="text-gray-400 hover:text-brand-gold transition duration-500"><i class="fa-solid fa-clipboard-list mr-1"></i> Order Form</a>
+                <a href="faq.html" class="text-gray-400 hover:text-brand-gold transition duration-500">FAQ</a>
+                <a href="checkout.html" class="bg-brand-gold text-black px-6 py-2 rounded font-bold hover:bg-[#b59858] transition duration-500 shadow-[0_0_15px_rgba(201,169,98,0.3)]">Order Now</a>
+            </div>
+            
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-2xl text-brand-gold"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        
+        <div id="mobile-menu" class="hidden bg-brand-panel p-4 flex flex-col space-y-4 border-t border-gray-800 absolute w-full left-0">
+            <a href="index.html" class="py-2 text-brand-gold font-bold">Home</a>
+            <a href="products.html" class="py-2 text-gray-300">Cards</a>
+            <a href="packages.html" class="py-2 text-gray-300">Packages</a>
+            <a href="order-form.html" class="py-2 text-gray-300">Order Form</a>
+            <a href="faq.html" class="py-2 text-gray-300">FAQ</a>
+            <a href="checkout.html" class="py-2 text-brand-gold font-bold">Order Now</a>
+        </div>
+    </nav>
+
+    <main class="pt-40 pb-20">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center py-10 min-h-[75vh]">
+                <div class="z-10">
+                    <div class="reveal">
+                        <button onclick="window.location.href='packages.html'" class="inline-flex items-center px-4 py-1.5 border border-brand-gold/50 bg-brand-gold/5 text-brand-gold rounded-full text-xs font-bold mb-8 hover:bg-brand-gold/10 hover:border-brand-gold transition duration-700 tracking-widest uppercase cursor-pointer">
+                            <i class="fa-solid fa-gem mr-2"></i> Corporate Bulk Pricing Available
+                        </button>
+                    </div>
+
+                    <h1 class="text-5xl lg:text-7xl font-serif font-bold leading-tight mb-6 text-white reveal delay-100">
+                        The Last Card <br>
+                        <span class="gold-gradient-text italic pr-2">You Will Ever Buy.</span>
+                    </h1>
+                    
+                    <p class="text-gray-400 text-lg mb-10 leading-relaxed max-w-lg font-light reveal delay-200">
+                        Share your contact info, social networks, and professional portfolio with a single tap. Skena utilizes premium NFC & QR technology to make a lasting impression.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-6 reveal delay-300">
+                        <a href="checkout.html" class="px-8 py-4 bg-brand-gold hover:bg-[#b59858] text-black rounded font-bold text-sm tracking-widest uppercase text-center transition duration-500 shadow-[0_0_20px_rgba(201,169,98,0.2)] hover:shadow-[0_0_30px_rgba(201,169,98,0.4)] hover:-translate-y-1 transform">
+                            Get Your Card
+                        </a>
+                        <a href="packages.html" class="px-8 py-4 border border-gray-600 hover:border-brand-gold text-white hover:text-brand-gold rounded font-medium text-sm tracking-widest uppercase text-center transition duration-500 bg-transparent">
+                            View Packages
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative flex justify-center perspective-1000 group reveal delay-400 mt-12 lg:mt-0">
+                    <div class="absolute inset-0 bg-brand-gold/20 blur-[100px] rounded-full w-3/4 h-3/4 m-auto z-0 transition duration-1000 group-hover:bg-brand-gold/30"></div>
+                    
+                    <div class="w-72 md:w-96 h-44 md:h-60 relative transform-style-3d flip-target cursor-pointer z-10 shadow-[0_30px_60px_rgba(0,0,0,0.8)]">
+                        <div class="absolute inset-0 backface-hidden">
+                            <img src="card-front.png" alt="Skena Card Front" class="w-full h-full object-contain rounded-xl" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-[#111] flex items-center justify-center border border-gray-800 rounded-xl text-brand-gold font-serif text-2xl\'>SKENA</div>'">
+                        </div>
+                        <div class="absolute inset-0 backface-hidden rotate-y-180">
+                            <img src="card-back.png" alt="Skena Card Back" class="w-full h-full object-contain rounded-xl" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-[#050505] flex items-center justify-center border border-[#C9A962] rounded-xl text-white font-serif text-2xl\'>TAP ME</div>'">
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -bottom-12 text-center w-full z-10">
+                        <span class="text-xs text-gray-500 uppercase tracking-widest font-bold opacity-70 group-hover:opacity-100 transition duration-700">Hover to flip</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-40 max-w-5xl mx-auto reveal">
+                <div class="text-center mb-12">
+                    <h2 class="text-xs text-brand-gold tracking-widest uppercase mb-3 font-bold">The Evolution</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-white">Why Upgrade to Skena?</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-0 border border-gray-800 rounded-lg overflow-hidden shadow-2xl">
+                    <div class="bg-[#0A0A0A] p-10 md:p-14">
+                        <h4 class="font-serif font-bold text-gray-600 mb-8 text-xl border-b border-gray-900 pb-4">Traditional Cards</h4>
+                        <ul class="space-y-6 text-sm text-gray-500">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-xmark mt-1 mr-4 text-gray-700 text-lg"></i> 
+                                <span class="leading-relaxed">88% are discarded or lost within a week.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-xmark mt-1 mr-4 text-gray-700 text-lg"></i> 
+                                <span class="leading-relaxed">Severely limited space for professional information.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-xmark mt-1 mr-4 text-gray-700 text-lg"></i> 
+                                <span class="leading-relaxed">Costly and wasteful to reprint when details change.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-xmark mt-1 mr-4 text-gray-700 text-lg"></i> 
+                                <span class="leading-relaxed">Impossible to track networking ROI or capture leads.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-brand-panel p-10 md:p-14 border-t md:border-t-0 md:border-l border-gray-800 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-gold/5 rounded-full blur-3xl -mr-10 -mt-10"></div>
+                        <h4 class="font-serif font-bold text-brand-gold mb-8 text-xl border-b border-gray-800 pb-4">Skena Digital Cards</h4>
+                        <ul class="space-y-6 text-sm text-gray-300">
+                            <li class="flex items-start group">
+                                <i class="fa-solid fa-check mt-1 mr-4 text-brand-gold text-lg transform group-hover:scale-110 transition duration-500"></i> 
+                                <span class="leading-relaxed">One premium card that lasts a lifetime.</span>
+                            </li>
+                            <li class="flex items-start group">
+                                <i class="fa-solid fa-check mt-1 mr-4 text-brand-gold text-lg transform group-hover:scale-110 transition duration-500"></i> 
+                                <span class="leading-relaxed">Instantly share website, socials, bio, and portfolios.</span>
+                            </li>
+                            <li class="flex items-start group">
+                                <i class="fa-solid fa-check mt-1 mr-4 text-brand-gold text-lg transform group-hover:scale-110 transition duration-500"></i> 
+                                <span class="leading-relaxed">Update your details instantly anytime via the cloud.</span>
+                            </li>
+                            <li class="flex items-start group">
+                                <i class="fa-solid fa-check mt-1 mr-4 text-brand-gold text-lg transform group-hover:scale-110 transition duration-500"></i> 
+                                <span class="leading-relaxed">Automatically collect leads & track networking analytics.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-40 text-center max-w-5xl mx-auto pb-20 reveal">
+                <h2 class="text-xs text-brand-gold tracking-widest uppercase mb-3 font-bold">Comprehensive Solution</h2>
+                <h3 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-white">The Power of Hybrid Networking</h3>
+                <p class="text-gray-400 mb-12 text-lg max-w-2xl mx-auto font-light">
+                    For the modern professional, we recommend utilizing both <strong class="text-brand-gold font-normal">Dynamic</strong> and <strong class="text-white font-normal">Static</strong> capabilities for a flawless connection everywhere.
+                </p>
+                
+                <div class="grid md:grid-cols-2 gap-8 text-left">
+                    <div class="luxury-panel p-10 md:p-12 rounded-lg group">
+                        <div class="w-14 h-14 bg-[#0A0A0A] border border-brand-gold/30 rounded flex items-center justify-center mb-8 transform group-hover:rotate-12 transition duration-700">
+                            <i class="fa-solid fa-wifi text-brand-gold text-2xl"></i>
+                        </div>
+                        <h4 class="font-serif font-bold text-2xl mb-4 text-white">Dynamic (Online)</h4>
+                        <p class="text-gray-400 leading-relaxed font-light">
+                            Create a rich, hosted digital profile. Ideal for networking events where you want to capture leads, track analytics, and present a comprehensive interactive portfolio. Requires an annual subscription.
+                        </p>
+                    </div>
+                    
+                    <div class="luxury-panel p-10 md:p-12 rounded-lg group">
+                        <div class="w-14 h-14 bg-[#0A0A0A] border border-gray-700 rounded flex items-center justify-center mb-8 transform group-hover:-rotate-12 transition duration-700">
+                            <i class="fa-solid fa-address-card text-white text-2xl"></i>
+                        </div>
+                        <h4 class="font-serif font-bold text-2xl mb-4 text-white">Static (Offline)</h4>
+                        <p class="text-gray-400 leading-relaxed font-light">
+                            Direct-to-phone contact sharing. Works perfectly in poor network areas by sharing your VCF contact file directly without requiring the internet. No annual subscription needed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-[#050505] border-t border-gray-900 pt-20 pb-12">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-center md:text-left mb-16">
+            <div>
+                <h3 class="font-serif font-bold text-2xl text-white mb-4 tracking-wider">SKENA</h3>
+                <p class="text-gray-500 text-sm font-light leading-relaxed">The pinnacle of digital networking. Elevate your professional interactions with premium NFC technology.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Direct Links</h4>
+                <ul class="space-y-3 text-sm text-gray-500">
+                    <li><a href="products.html" class="hover:text-brand-gold transition duration-300">Our Cards</a></li>
+                    <li><a href="packages.html" class="hover:text-brand-gold transition duration-300">Investment Plans</a></li>
+                    <li><a href="faq.html" class="hover:text-brand-gold transition duration-300">Client Support</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Concierge</h4>
+                <ul class="space-y-3 text-sm text-gray-500">
+                    <li><i class="fa-regular fa-envelope mr-2 text-brand-gold"></i> info@theskena.com</li>
+                    <li><i class="fa-solid fa-phone mr-2 text-brand-gold"></i> +254 113 895800</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 text-center border-t border-gray-900 pt-8">
+            <p class="text-gray-600 font-serif tracking-widest text-xs uppercase">© 2025 Skena Luxury Networking. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/254113895800?text=Hello%20Skena,%20I%20am%20interested%20in%20elevating%20my%20networking." target="_blank" class="fixed bottom-6 right-6 w-14 h-14 bg-[#C9A962] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(201,169,98,0.4)] hover:scale-110 transition duration-500 z-40">
+        <i class="fa-brands fa-whatsapp text-black text-3xl"></i>
+    </a>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            const logo = document.getElementById('nav-logo');
+            if (window.scrollY > 50) {
+                nav.classList.remove('py-4');
+                nav.classList.add('py-2', 'shadow-2xl');
+                logo.classList.remove('h-32');
+                logo.classList.add('h-16');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2', 'shadow-2xl');
+                logo.classList.add('h-32');
+                logo.classList.remove('h-16');
+            }
+        });
+
+        // Intersection Observer for scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        // Keep opacity 1 after animation finishes
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                        }, 1200);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Pause animations initially if they are below the fold
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top > window.innerHeight) {
+                    el.style.animationPlayState = 'paused';
+                }
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
