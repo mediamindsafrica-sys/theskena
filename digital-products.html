@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="shortcut icon" href="images/favicon.ico">
+<title>Digital Products — Skena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-hero{padding:5.5rem 4vw 3.5rem;border-bottom:1px solid var(--line);text-align:center;}
+  .page-hero .eyebrow{justify-content:center;}
+  .page-hero h1{font-size:clamp(2.8rem,7vw,5.2rem);max-width:900px;margin:0 auto 1.2rem;line-height:1;}
+  .page-hero p{max-width:600px;margin:0 auto 2rem;}
+  .page-hero .hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  .compare-col{background:var(--bg);padding:2.2rem;}
+  .compare-col.highlight{background:var(--bg-alt);}
+  .compare-col h3{font-family:var(--display);font-size:1.6rem;margin-bottom:1.2rem;font-weight:400;}
+  .compare-col ul{list-style:none;}
+  .compare-col li{font-size:0.9rem;padding:0.6rem 0;border-top:1px solid var(--line);color:var(--text-dim);padding-left:1.4rem;position:relative;}
+  .compare-col.highlight li{color:var(--text);}
+  .compare-col li::before{content:'✕';position:absolute;left:0;color:#b04545;}
+  .compare-col.highlight li::before{content:'✓';color:var(--teal);}
+  @media(max-width:700px){.compare-grid{grid-template-columns:1fr;}}
+
+  .hybrid-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .hybrid-card{border:1px solid var(--line);padding:2.2rem;background:var(--bg);}
+  .hybrid-card .tc{font-family:var(--mono);font-size:0.68rem;color:var(--gold);margin-bottom:0.8rem;text-transform:uppercase;}
+  .hybrid-card h3{font-size:1.5rem;margin-bottom:0.8rem;}
+  .hybrid-card p{color:var(--text-dim);font-size:0.9rem;}
+  @media(max-width:700px){.hybrid-grid{grid-template-columns:1fr;}}
+
+  .hw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-bottom:1.5rem;}
+  .hw-card{border:1px solid var(--line);background:var(--bg);overflow:hidden;}
+  .hw-card img{width:100%;aspect-ratio:1.586/1;object-fit:cover;display:block;}
+  .hw-card-body{padding:1.6rem;}
+  .hw-card .tc{font-family:var(--mono);font-size:0.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.6rem;}
+  .hw-card h4{font-size:1.25rem;margin-bottom:0.5rem;}
+  .hw-card p.desc{color:var(--text-dim);font-size:0.86rem;margin-bottom:1rem;}
+  .hw-note{background:var(--bg-alt);border-left:2px solid var(--teal);padding:0.7rem 0.9rem;font-size:0.78rem;color:var(--text-dim);margin-bottom:1.2rem;}
+  .hw-price-row{display:flex;justify-content:space-between;align-items:center;}
+  .hw-price{font-family:var(--display);font-size:1.7rem;color:var(--gold);}
+
+  .kit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;}
+  .kit-card{border:1px solid var(--line);background:var(--bg);overflow:hidden;position:relative;}
+  .kit-card.best{border-color:var(--gold);}
+  .kit-card .best-badge{position:absolute;top:0;right:0;background:var(--gold);color:var(--bg);font-family:var(--mono);font-size:0.62rem;padding:0.3rem 0.8rem;letter-spacing:0.05em;z-index:2;}
+  .kit-card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;}
+  .kit-card-body{padding:1.8rem;}
+  .kit-card h4{font-size:1.5rem;margin-bottom:0.3rem;}
+  .kit-card .kit-desc{color:var(--text-dim);font-size:0.88rem;margin-bottom:1rem;}
+  .kit-card .kit-price{font-family:var(--display);font-size:2rem;color:var(--gold);margin-bottom:1.2rem;}
+  .kit-card .kit-price sub{font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);}
+  .kit-list{list-style:none;margin-bottom:1.4rem;}
+  .kit-list li{padding:0.7rem 0;border-top:1px solid var(--line);}
+  .kit-list .qty{font-family:var(--display);color:var(--gold);font-size:1.1rem;margin-right:0.5rem;}
+  .kit-list .item-name{font-weight:600;font-size:0.92rem;}
+  .kit-list .item-note{display:block;color:var(--text-dim);font-size:0.78rem;margin-top:0.1rem;}
+
+  .plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+  .plan-card{background:var(--bg);padding:2.2rem 1.8rem;display:flex;flex-direction:column;position:relative;}
+  .plan-card.popular{background:var(--bg-alt);border-top:2px solid var(--gold);}
+  .plan-card .badge{position:absolute;top:-1px;right:0;background:var(--gold);color:var(--bg);font-family:var(--mono);font-size:0.6rem;padding:0.3rem 0.7rem;}
+  .plan-best-for{font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;margin-bottom:1rem;}
+  .plan-amount{font-family:var(--display);font-size:2.1rem;color:var(--gold);margin-bottom:0.2rem;}
+  .plan-amount sub{font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);}
+  .plan-card ul{list-style:none;flex:1;margin:1rem 0;}
+  .plan-card li{font-size:0.84rem;padding:0.5rem 0;border-top:1px solid var(--line);padding-left:1.3rem;position:relative;}
+  .plan-card li::before{content:'✓';position:absolute;left:0;color:var(--teal);}
+  .plan-card li.no::before{content:'✕';color:#b04545;}
+  .plan-card li.no{color:var(--text-dim);}
+
+  .advantage-box{background:var(--bg-alt);border:1px solid var(--gold);padding:2.2rem;}
+  .advantage-box .tag{font-family:var(--mono);font-size:0.7rem;color:var(--gold);text-transform:uppercase;margin-bottom:0.8rem;}
+  .advantage-box h3{font-size:1.4rem;margin-bottom:1rem;}
+  .advantage-box p{color:var(--text-dim);font-size:0.92rem;margin-bottom:0.8rem;}
+  .advantage-box .total{font-family:var(--display);font-size:1.6rem;color:var(--teal);}
+
+  .scenario-table{width:100%;border-collapse:collapse;font-size:0.86rem;}
+  .scenario-table th{text-align:left;font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;
+    padding:0.8rem 1rem;border-bottom:1px solid var(--line);letter-spacing:0.04em;}
+  .scenario-table td{padding:0.9rem 1rem;border-bottom:1px solid var(--line);}
+  .scenario-table tr:last-child td{border-bottom:none;}
+  .scenario-table td:first-child{font-weight:600;}
+  .scenario-table{overflow-x:auto;display:block;}
+
+  .faq-group{margin-bottom:2.5rem;}
+  .faq-group h3{font-family:var(--display);font-size:1.5rem;font-weight:400;margin-bottom:1rem;color:var(--gold);}
+  .faq-item{border-top:1px solid var(--line);padding:1.4rem 0;}
+  .faq-item.popular-q{background:var(--bg-alt);padding:1.4rem 1.2rem;border:1px solid var(--gold);margin:0.4rem 0;}
+  .faq-item h4{font-family:var(--body);font-weight:600;margin-bottom:0.5rem;font-size:0.98rem;}
+  .faq-item p{color:var(--text-dim);font-size:0.88rem;}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav>
+  <a href="index.html" class="logo">SKENA<span>.</span></a>
+  <div class="navlinks">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="digital-products.html" class="active">Digital Products</a>
+    <a href="work.html">Work</a>
+    <a href="team.html">Team</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%27d%20like%20to%20book%20a%20strategy%20call." target="_blank" class="nav-cta">Book a call →</a>
+</nav>
+
+<section class="page-hero">
+  <div class="eyebrow">Digital Products</div>
+  <h1>The last card<br>you will ever buy.</h1>
+  <p class="section-sub" style="margin:0 auto 2rem;">Share your contact info, socials, and professional portfolio with a single tap. Premium NFC and QR technology that makes a lasting impression — and never needs reprinting.</p>
+  <div class="hero-actions">
+    <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20a%20card." target="_blank" class="btn-primary">Get your card →</a>
+    <a href="#packages" class="btn-secondary">View packages ↓</a>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Why upgrade</div>
+  <h2>Why switch from a paper card?</h2>
+  <div class="compare-grid">
+    <div class="compare-col">
+      <h3>Traditional Cards</h3>
+      <ul>
+        <li>88% are discarded or lost within a week</li>
+        <li>Severely limited space for information</li>
+        <li>Costly and wasteful to reprint when details change</li>
+        <li>No way to track who you handed a card to</li>
+      </ul>
+    </div>
+    <div class="compare-col highlight">
+      <h3>Skena Digital Cards</h3>
+      <ul>
+        <li>One premium card that lasts a lifetime</li>
+        <li>Instantly share website, socials, bio, and portfolio</li>
+        <li>Update your details anytime via the cloud</li>
+        <li>Capture leads and track networking automatically</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">How it works</div>
+  <h2>The power of hybrid networking.</h2>
+  <p class="section-sub">For the modern professional, we recommend using both — one card, two ways to connect, so you're never caught without a way to share your details.</p>
+  <div class="hybrid-grid">
+    <div class="hybrid-card">
+      <div class="tc">Dynamic — Online</div>
+      <h3>Rich, hosted profile</h3>
+      <p>Ideal for networking events where you want to capture leads, track analytics, and present a full interactive portfolio. Requires an annual software subscription (below).</p>
+    </div>
+    <div class="hybrid-card">
+      <div class="tc">Static — Offline</div>
+      <h3>Direct-to-phone sharing</h3>
+      <p>Shares your contact file (VCF) directly to their phone — works perfectly in poor network areas, no internet needed. No subscription required.</p>
+    </div>
+  </div>
+</section>
+
+<section id="packages">
+  <div class="eyebrow">Precision crafted</div>
+  <h2>Hardware collection.</h2>
+  <p class="section-sub">Premium physical NFC cards, engineered to make a lasting impression. All hardware is a one-time purchase.</p>
+
+  <div class="hw-grid">
+    <div class="hw-card">
+      <img src="images/card-digital-business.jpg" alt="Digital Business Card">
+      <div class="hw-card-body">
+        <div class="tc">Dynamic Profile</div>
+        <h4>Digital Business Card</h4>
+        <p class="desc">Our flagship interactive card. Tap to open your fully hosted digital portfolio, capture client leads, and share social links.</p>
+        <div class="hw-note">⚠ Requires an active annual software subscription to host your dynamic online profile.</div>
+        <div class="hw-price-row">
+          <div class="hw-price">1,500 KES</div>
+          <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20a%20Digital%20Business%20Card." target="_blank" class="btn-secondary">Select →</a>
+        </div>
+      </div>
+    </div>
+    <div class="hw-card">
+      <img src="images/card-google-review.jpg" alt="Google Review Card">
+      <div class="hw-card-body">
+        <div class="tc">Local SEO Booster</div>
+        <h4>Google Review Card</h4>
+        <p class="desc">Skyrocket your online reputation. One tap directs clients straight to your business's Google Review submission page.</p>
+        <div class="hw-note">✓ Zero ongoing fees — functions independently, no subscription needed.</div>
+        <div class="hw-price-row">
+          <div class="hw-price">1,500 KES</div>
+          <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20a%20Google%20Review%20Card." target="_blank" class="btn-secondary">Select →</a>
+        </div>
+      </div>
+    </div>
+    <div class="hw-card">
+      <img src="images/card-static-contact.jpg" alt="Static Contact Card">
+      <div class="hw-card-body">
+        <div class="tc">Offline Networking</div>
+        <h4>Static Contact Card</h4>
+        <p class="desc">Direct-to-phone contact sharing (.VCF file). Works instantly without internet. Perfect for remote areas or fast connections.</p>
+        <div class="hw-note">✓ Zero ongoing fees — functions completely offline, no subscription needed.</div>
+        <div class="hw-price-row">
+          <div class="hw-price">1,500 KES</div>
+          <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20a%20Static%20Contact%20Card." target="_blank" class="btn-secondary">Select →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eyebrow" style="margin-top:3rem;">Curated hardware kits</div>
+  <div class="kit-grid">
+    <div class="kit-card">
+      <img src="images/kit-starter.jpg" alt="Starter Kit">
+      <div class="kit-card-body">
+        <h4>Starter Kit</h4>
+        <p class="kit-desc">The essential hybrid networking arsenal.</p>
+        <div class="kit-price">4,500 KES <sub>(one-time)</sub></div>
+        <ul class="kit-list">
+          <li><span class="qty">1</span><span class="item-name">Dynamic Business Card</span><span class="item-note">Requires software subscription</span></li>
+          <li><span class="qty">1</span><span class="item-name">Static Contact Card</span><span class="item-note">Subscription-free</span></li>
+          <li><span class="qty">1</span><span class="item-name">Google Review Card</span><span class="item-note">Subscription-free</span></li>
+        </ul>
+        <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20the%20Starter%20Kit." target="_blank" class="btn-secondary">Select Starter Kit →</a>
+      </div>
+    </div>
+    <div class="kit-card best">
+      <div class="best-badge">BEST VALUE</div>
+      <img src="images/kit-growth.jpg" alt="Growth Kit">
+      <div class="kit-card-body">
+        <h4>Growth Kit</h4>
+        <p class="kit-desc">Comprehensive toolset for expanding businesses.</p>
+        <div class="kit-price">6,750 KES <sub>(one-time)</sub></div>
+        <ul class="kit-list">
+          <li><span class="qty">2</span><span class="item-name">Dynamic Business Cards</span><span class="item-note">Link both to 1 profile (1 subscription)</span></li>
+          <li><span class="qty">2</span><span class="item-name">Google Review Cards</span><span class="item-note">Place at multiple checkout points</span></li>
+          <li><span class="qty">1</span><span class="item-name">Static Contact Card</span><span class="item-note">For offline emergencies</span></li>
+        </ul>
+        <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20the%20Growth%20Kit." target="_blank" class="btn-primary" style="text-align:center;">Select Growth Kit →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Software subscriptions</div>
+  <h2>Investment plans.</h2>
+  <p class="section-sub">100% annual commitment, no monthly fees. Only Dynamic Business Cards require a subscription — Static and Google Review cards never do.</p>
+  <div class="plan-grid">
+    <div class="plan-card">
+      <div class="plan-best-for">Best for: Business owners sharing contact details</div>
+      <div class="plan-amount">1,999 KES<sub>/year</sub></div>
+      <ul>
+        <li>Hosted digital profile</li>
+        <li>Unlimited self-service dashboard updates</li>
+        <li>1 professional design refresh every 2 months</li>
+        <li>Contact sharing (VCF)</li>
+        <li class="no">Lead capture</li>
+        <li class="no">Analytics</li>
+      </ul>
+      <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%27d%20like%20the%20Individual%20software%20plan." target="_blank" class="btn-secondary">Select Plan →</a>
+    </div>
+    <div class="plan-card popular">
+      <div class="badge">MOST POPULAR</div>
+      <div class="plan-best-for">Best for: Sales professionals, networkers</div>
+      <div class="plan-amount">3,500 KES<sub>/year</sub></div>
+      <ul>
+        <li>Everything in Individual</li>
+        <li>Lead capture form (name, email, phone)</li>
+        <li>Monthly analytics report</li>
+        <li>Download leads as CSV</li>
+      </ul>
+      <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%27d%20like%20the%20Individual%20Plus%20software%20plan." target="_blank" class="btn-primary" style="text-align:center;">Select Plan →</a>
+    </div>
+    <div class="plan-card">
+      <div class="plan-best-for">Best for: Businesses needing instant follow-up</div>
+      <div class="plan-amount">4,200 KES<sub>/year</sub></div>
+      <ul>
+        <li>Everything in Individual Plus+</li>
+        <li>Instant email alerts when card is tapped</li>
+        <li>Weekly lead summary reports</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%27d%20like%20the%20Enterprise%20software%20plan." target="_blank" class="btn-secondary">Select Plan →</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="advantage-box">
+    <div class="tag">💎 One profile, unlimited cards</div>
+    <h3>The Skena Advantage</h3>
+    <p>Your subscription covers your digital profile — the page people see when they tap your card. You can link unlimited physical cards to that same profile at no extra software cost. Highly recommended for teams.</p>
+    <p>Example: buy 5 business cards for your team (7,500 KES hardware). Link them all to one company profile (3,500 KES/year software).</p>
+    <div class="total">Total annual cost: KES 3,500 — not KES 17,500</div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Example scenarios</div>
+  <h2>What it costs, put together.</h2>
+  <table class="scenario-table">
+    <tr><th>Scenario</th><th>Hardware (one-time)</th><th>Software (annual)</th><th>First year total</th><th>Annual renewal</th></tr>
+    <tr><td>Solo Professional</td><td>1 Business Card (1,500 KES)</td><td>Individual Plus+ (3,500 KES)</td><td>5,000 KES</td><td>3,500 KES</td></tr>
+    <tr><td>Hybrid Networker</td><td>Starter Kit (4,500 KES)</td><td>Individual Plus+ (3,500 KES)</td><td>8,000 KES</td><td>3,500 KES</td></tr>
+    <tr><td>Team Essentials</td><td>Growth Kit (6,750 KES)</td><td>Enterprise (4,200 KES)</td><td>10,950 KES</td><td>4,200 KES</td></tr>
+    <tr><td>Review Collector</td><td>1 Google Review Card (1,500 KES)</td><td>None required (0 KES)</td><td>1,500 KES</td><td>0 KES</td></tr>
+  </table>
+</section>
+
+<section style="border-bottom:none;">
+  <div class="eyebrow">Client support</div>
+  <h2>Frequently asked questions.</h2>
+
+  <div class="faq-group">
+    <h3>Technology &amp; Usage</h3>
+    <div class="faq-item">
+      <h4>How exactly does a Skena card work?</h4>
+      <p>Skena cards use embedded NFC (Near Field Communication) technology. Tap your card against any modern smartphone and your customized digital profile or contact card loads instantly. We also include a QR code on the back for older devices without NFC.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Does the other person need an app to receive my details?</h4>
+      <p>No. The experience is completely seamless — your profile or contact file opens directly in their native browser (Safari, Chrome) instantly upon tapping or scanning.</p>
+    </div>
+  </div>
+
+  <div class="faq-group">
+    <h3>Pricing &amp; Subscriptions</h3>
+    <div class="faq-item">
+      <h4>How does the pricing structure work?</h4>
+      <p>We separate hardware from software. The physical cards are a one-time purchase. To host dynamic profiles, capture leads, and use analytics, you need a software subscription, billed annually.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Do all cards require an annual subscription?</h4>
+      <p>No — only Dynamic Cards (which host your online profile) require one. Static Contact Cards and Google Review Cards have zero ongoing fees; they're a strict one-time purchase.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Can I pay monthly instead of annually?</h4>
+      <p>Software subscriptions are billed annually only, to keep the service simple and uninterrupted. We don't currently offer monthly plans.</p>
+    </div>
+    <div class="faq-item popular-q">
+      <h4>★ Popular question — Can I link multiple physical cards to one profile?</h4>
+      <p>Yes — this is the Skena Advantage. Your subscription covers your profile. You can buy unlimited hardware cards and link them all to a single subscribed profile at no extra software cost. Highly recommended for teams.</p>
+    </div>
+  </div>
+
+  <div class="faq-group">
+    <h3>Orders &amp; Customization</h3>
+    <div class="faq-item">
+      <h4>How do I design the physical look of my card?</h4>
+      <p>Once you confirm your package with us on WhatsApp, our team will connect with you directly. You'll share your logo and branding, and we'll send you digital proofs for approval before manufacturing.</p>
+    </div>
+    <div class="faq-item">
+      <h4>How long does delivery take?</h4>
+      <p>Once you approve the digital proof, manufacturing and local delivery within Kenya typically takes 2 to 4 business days.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" style="border-bottom:none;text-align:center;">
+  <div class="eyebrow" style="justify-content:center;">Ready to order</div>
+  <h2>Let's get your card made.</h2>
+  <p class="section-sub" style="margin:0 auto 2rem;">Message us on WhatsApp with your name, job title, and what you'd like on the card — we'll take it from there.</p>
+  <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%27d%20like%20to%20order%20a%20card.%20Here%20are%20my%20details%3A%20%0AName%3A%20%0AJob%20title%3A%20%0ACompany%3A%20%0APackage%20I%27m%20interested%20in%3A%20" target="_blank" class="btn-primary">Order via WhatsApp →</a>
+</section>
+
+<footer>
+  <div><a href="index.html" class="logo">SKENA<span>.</span></a><div class="fine">Nairobi, Kenya</div></div>
+  <div class="fine">theskena.com</div>
+</footer>
+
+<script>
+  document.querySelectorAll('section').forEach(el=>el.classList.add('reveal'));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script src="script.js"></script>
+</body>
+</html>

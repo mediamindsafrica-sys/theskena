@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="shortcut icon" href="images/favicon.ico">
+<title>Contact — Skena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .contact-wrap{padding:6rem 4vw;display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
+  .contact-wrap h1{font-size:clamp(2.6rem,6vw,4.4rem);margin-bottom:1.2rem;}
+  .contact-info div{font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);margin-bottom:1.4rem;}
+  .contact-info strong{display:block;color:var(--text);font-family:var(--body);font-size:1rem;margin-top:0.3rem;font-weight:600;}
+  .contact-info a{color:var(--text);text-decoration:none;}
+  .contact-info a:hover{color:var(--gold);}
+  .quick-actions{display:flex;flex-direction:column;gap:0.9rem;margin-top:2rem;}
+  .quick-actions a{display:flex;align-items:center;gap:0.8rem;border:1px solid var(--line);padding:1rem 1.3rem;
+    text-decoration:none;color:var(--text);font-family:var(--body);font-weight:600;transition:border-color .2s,transform .2s;}
+  .quick-actions a:hover{border-color:var(--gold);transform:translateX(4px);}
+  .quick-actions .qa-icon{font-family:var(--mono);color:var(--gold);font-size:0.9rem;}
+  form{display:flex;flex-direction:column;gap:1.2rem;}
+  label{font-family:var(--mono);font-size:0.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;}
+  input,textarea,select{background:var(--bg-alt);border:1px solid var(--line);color:var(--text);padding:0.9rem;font-family:var(--body);font-size:0.95rem;}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold);}
+  textarea{min-height:120px;resize:vertical;}
+  button{background:var(--gold);color:var(--bg);border:none;padding:1rem;font-family:var(--mono);font-size:0.9rem;letter-spacing:0.04em;cursor:pointer;}
+  @media(max-width:820px){.contact-wrap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav>
+  <a href="index.html" class="logo">SKENA<span>.</span></a>
+  <div class="navlinks">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="digital-products.html">Digital Products</a>
+    <a href="work.html">Work</a>
+    <a href="team.html">Team</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="contact.html" class="active">Contact</a>
+  </div>
+  <a href="https://wa.me/254727128689?text=Hi%20Skena,%20I'd%20like%20to%20book%20a%20strategy%20call." target="_blank" class="nav-cta">Book a call →</a>
+</nav>
+
+<div class="contact-wrap">
+  <div>
+    <div class="eyebrow">Get in touch</div>
+    <h1>Let's talk about what you're building.</h1>
+    <p class="section-sub">Fastest way to reach us is WhatsApp — we usually reply the same day.</p>
+    <div class="contact-info">
+      <div>CALL<strong><a href="tel:+254704326336">0704 326 336</a></strong></div>
+      <div>WHATSAPP<strong><a href="https://wa.me/254727128689?text=Hi%20Skena%21" target="_blank">0727 128 689</a></strong></div>
+      <div>BASED IN<strong>Nairobi, Kenya</strong></div>
+    </div>
+    <div class="quick-actions">
+      <a href="https://wa.me/254727128689?text=Hi%20Skena%21" target="_blank"><span class="qa-icon">→</span> Message us on WhatsApp</a>
+      <a href="tel:+254704326336"><span class="qa-icon">→</span> Call 0704 326 336</a>
+    </div>
+  </div>
+  <form id="waForm">
+    <div>
+      <label>Name</label>
+      <input type="text" id="waName" placeholder="Your name">
+    </div>
+    <div>
+      <label>Business name</label>
+      <input type="text" id="waBusiness" placeholder="Your business">
+    </div>
+    <div>
+      <label>What do you need</label>
+      <select id="waNeed">
+        <option>Video Production</option>
+        <option>Social Media Content</option>
+        <option>Event Coverage</option>
+        <option>Content Strategy</option>
+        <option>Digital Business Cards / Review Cards / Menus</option>
+        <option>Not sure yet</option>
+      </select>
+    </div>
+    <div>
+      <label>Tell us more</label>
+      <textarea id="waMessage" placeholder="What are you building, and what do you need help with?"></textarea>
+    </div>
+    <button type="button" onclick="sendToWhatsApp()">Send via WhatsApp →</button>
+  </form>
+</div>
+
+<footer>
+  <div><a href="index.html" class="logo">SKENA<span>.</span></a><div class="fine">Nairobi, Kenya</div></div>
+  <div class="fine">theskena.com</div>
+</footer>
+
+<script>
+  function sendToWhatsApp(){
+    const name = document.getElementById('waName').value || 'Someone';
+    const business = document.getElementById('waBusiness').value || 'a business';
+    const need = document.getElementById('waNeed').value;
+    const message = document.getElementById('waMessage').value || '';
+    const text = `Hi Skena, I'm ${name} from ${business}. I'm interested in: ${need}. ${message}`;
+    window.open('https://wa.me/254727128689?text=' + encodeURIComponent(text), '_blank');
+  }
+  document.querySelectorAll('section').forEach(el=>el.classList.add('reveal'));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script src="script.js"></script>
+</body>
+</html>
