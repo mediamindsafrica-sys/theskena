@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="shortcut icon" href="images/favicon.ico">
+<title>Content Strategy — Skena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .svc-hero{padding:5rem 4vw 4rem;display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;border-bottom:1px solid var(--line);}
+  .svc-hero h1{font-size:clamp(2.6rem,6.5vw,4.6rem);line-height:0.98;margin-bottom:1.2rem;}
+  .svc-hero-meta{border-left:1px solid var(--line);padding-left:2rem;}
+  .svc-hero-meta div{font-family:var(--mono);font-size:0.72rem;color:var(--text-dim);margin-bottom:1.2rem;}
+  .svc-hero-meta strong{display:block;color:var(--text);font-family:var(--body);font-size:1rem;margin-top:0.3rem;font-weight:600;}
+  @media(max-width:820px){.svc-hero{grid-template-columns:1fr;}.svc-hero-meta{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:1.5rem;}}
+
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+  .why-card{background:var(--bg);padding:2rem 1.6rem;}
+  .why-card .tc{font-family:var(--mono);font-size:0.68rem;color:var(--gold);margin-bottom:0.8rem;}
+  .why-card h3{font-size:1.3rem;margin-bottom:0.5rem;}
+  .why-card p{color:var(--text-dim);font-size:0.88rem;}
+
+  .process-list{border-top:1px solid var(--line);}
+  .process-item{display:grid;grid-template-columns:100px 1fr;gap:2rem;padding:1.8rem 0;border-bottom:1px solid var(--line);}
+  .process-item .tc{font-family:var(--mono);font-size:0.9rem;color:var(--gold);}
+  .process-item h4{font-size:1.2rem;margin-bottom:0.4rem;font-family:var(--body);font-weight:600;}
+  .process-item p{color:var(--text-dim);font-size:0.9rem;max-width:520px;}
+
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+  .proj-card{border:1px solid var(--line);aspect-ratio:16/10;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:1.4rem;background:linear-gradient(160deg,var(--bg-alt),var(--bg));position:relative;}
+  .proj-card h4{font-size:1.3rem;}
+  .proj-card p{color:var(--text-dim);font-size:0.82rem;margin-top:0.2rem;}
+
+  .price-box{border:1px solid var(--gold);padding:2.5rem;display:flex;flex-direction:column;gap:1.5rem;max-width:500px;}
+  .price-box .amount{font-family:var(--display);font-size:2.6rem;color:var(--gold);}
+  .price-box ul{list-style:none;}
+  .price-box li{font-size:0.9rem;padding:0.5rem 0;border-top:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav>
+  <a href="index.html" class="logo">SKENA<span>.</span></a>
+  <div class="navlinks">
+    <a href="index.html">Home</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="digital-products.html">Digital Products</a>
+    <a href="work.html">Work</a>
+    <a href="team.html">Team</a>
+    <a href="pricing.html">Pricing</a>
+  <a href="contact.html">Contact</a>
+  </div>
+  <a href="https://wa.me/254727128689?text=Hi%20Skena,%20I'd%20like%20to%20book%20a%20strategy%20call." target="_blank" class="nav-cta">Book a call →</a>
+</nav>
+
+<section class="svc-hero">
+  <div>
+    <div class="eyebrow">Service 04</div>
+    <h1>Content Strategy</h1>
+    <p class="section-sub">The planning layer underneath everything else — who you're speaking to, what they need to see, and in what order, so your content compounds instead of resetting every month.</p>
+    <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20book%20Content%20Strategy." target="_blank" class="btn-primary">Book this service →</a>
+  </div>
+  <div class="svc-hero-meta">
+    <div>DELIVERS<strong>A plan that compounds</strong></div>
+    <div>BEST FOR<strong>Businesses ready to scale content</strong></div>
+    <div>DELIVERY<strong>Ongoing, monthly</strong></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Why it matters</div>
+  <h2>Random posts get random results. A plan gets predictable ones.</h2>
+  <p class="section-sub">Most content fails not because it looks bad, but because there's no plan behind it — no sense of who it's for or what it's supposed to lead to. Strategy is what turns scattered posts into a system that actually grows your business.</p>
+  <div class="why-grid">
+    <div class="why-card"><div class="tc">RESULT</div><h3>Clarity</h3><p>Everyone on the team knows what's being posted, when, and why.</p></div>
+    <div class="why-card"><div class="tc">RESULT</div><h3>Direction</h3><p>Every piece of content has a job in the bigger plan — not just filling a slot.</p></div>
+    <div class="why-card"><div class="tc">RESULT</div><h3>Measurement</h3><p>Real reporting, so you know what's working and what to cut.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">How it works</div>
+  <h2>From audit to ongoing plan.</h2>
+  <div class="process-list">
+    <div class="process-item"><div class="tc">01</div><div><h4>Discovery call</h4><p>We learn your story, your audience, and what the video actually needs to do for your business.</p></div></div>
+    <div class="process-item"><div class="tc">02</div><div><h4>Shoot</h4><p>On-site filming — interviews, b-roll, whatever the story calls for.</p></div></div>
+    <div class="process-item"><div class="tc">03</div><div><h4>Edit &amp; grade</h4><p>Story-first edit, colour graded, sound designed — built for how people actually watch.</p></div></div>
+    <div class="process-item"><div class="tc">04</div><div><h4>Delivery</h4><p>Final files in the formats you need — landscape for web, vertical for social.</p></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Example projects</div>
+  <h2>Work in this category.</h2>
+  <div class="proj-grid">
+    <div class="proj-card"><h4>August Content Calendar</h4><p>The Human Garage — 3 accounts</p></div>
+    <div class="proj-card"><h4>KPI Reporting</h4><p>The Human Garage</p></div>
+  </div>
+</section>
+
+<section style="border-bottom:none;">
+  <div class="eyebrow">Pricing</div>
+  <h2>What it costs.</h2>
+  <div class="price-box">
+    <div>
+      <div class="timecode">STARTING AT</div>
+      <div class="amount">KES 30,000<sub style="font-family:var(--mono);font-size:0.8rem;color:var(--text-dim);">/mo</sub></div>
+    </div>
+    <ul>
+      <li>Audit + monthly calendar</li>
+      <li>Reporting</li>
+      <li>[Add exact deliverables]</li>
+    </ul>
+    <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20book%20Content%20Strategy." target="_blank" class="btn-primary">Book this service →</a>
+  </div>
+</section>
+
+<footer>
+  <div><a href="index.html" class="logo">SKENA<span>.</span></a><div class="fine">Nairobi, Kenya</div></div>
+  <div class="fine">theskena.com</div>
+</footer>
+
+<script>
+  document.querySelectorAll('section').forEach(el=>el.classList.add('reveal'));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="shortcut icon" href="images/favicon.ico">
+<title>Services — Skena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-hero{padding:5rem 4vw 3rem;}
+  .page-hero h1{font-size:clamp(2.6rem,7vw,5rem);max-width:800px;line-height:0.98;}
+
+  .svc-row{display:grid;grid-template-columns:0.9fr 1.5fr;gap:3rem;padding:4rem 4vw;border-bottom:1px solid var(--line);}
+  .svc-row .num{font-family:var(--display);font-size:5rem;color:var(--line);line-height:1;}
+  .svc-row h2{font-size:2.4rem;margin-bottom:1rem;}
+  .svc-row p{color:var(--text-dim);max-width:520px;margin-bottom:1.5rem;}
+  .svc-row .includes{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;}
+  .svc-row .includes span{font-family:var(--mono);font-size:0.7rem;color:var(--teal);border:1px solid var(--teal);padding:0.25rem 0.6rem;}
+  @media(max-width:820px){.svc-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav>
+  <a href="index.html" class="logo">SKENA<span>.</span></a>
+  <div class="navlinks">
+    <a href="index.html">Home</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="digital-products.html">Digital Products</a>
+    <a href="work.html">Work</a>
+    <a href="team.html">Team</a>
+    <a href="pricing.html">Pricing</a>
+  <a href="contact.html">Contact</a>
+  </div>
+  <a href="https://wa.me/254727128689?text=Hi%20Skena,%20I'd%20like%20to%20book%20a%20strategy%20call." target="_blank" class="nav-cta">Book a call →</a>
+</nav>
+
+<section class="page-hero" style="border-bottom:1px solid var(--line);">
+  <div class="eyebrow">What we do</div>
+  <h1>Four services.<br>One outcome — <span style="color:var(--gold);">your business, seen and trusted.</span></h1>
+  <p class="section-sub" style="margin-top:1.5rem;">Pick one, or run all four together as a system. Every service page below breaks down what's included, how it works, example projects, and pricing.</p>
+</section>
+
+<div class="svc-row">
+  <div class="num">01</div>
+  <div>
+    <h2>Video Production</h2>
+    <p>Documentaries, testimonials, and brand films that do the trust-building for you — so by the time someone reaches out, they already believe in what you do.</p>
+    <div class="includes"><span>Documentary</span><span>Testimonial</span><span>Brand Film</span><span>Colour Grade</span></div>
+    <a href="service-production.html" class="btn-secondary">See the full breakdown →</a>
+  </div>
+</div>
+
+<div class="svc-row">
+  <div class="num">02</div>
+  <div>
+    <h2>Social Media Content</h2>
+    <p>A steady, planned stream of reels and posts — built around what makes someone stop, believe you, and act. Not just content for content's sake.</p>
+    <div class="includes"><span>Reels</span><span>Carousels</span><span>Campaigns</span><span>Community</span></div>
+    <a href="service-social.html" class="btn-secondary">See the full breakdown →</a>
+  </div>
+</div>
+
+<div class="svc-row">
+  <div class="num">03</div>
+  <div>
+    <h2>Event Coverage</h2>
+    <p>Your launch, training, or activation — captured and turned into content while the room still remembers it happened. No two-month delay.</p>
+    <div class="includes"><span>Live Events</span><span>Highlight Reels</span><span>Same-week Turnaround</span></div>
+    <a href="service-events.html" class="btn-secondary">See the full breakdown →</a>
+  </div>
+</div>
+
+<div class="svc-row" style="border-bottom:none;">
+  <div class="num">04</div>
+  <div>
+    <h2>Content Strategy</h2>
+    <p>The plan underneath everything else — who you're speaking to, what they need to see, and in what order, so content compounds instead of resetting every month.</p>
+    <div class="includes"><span>Calendars</span><span>Reporting</span><span>Ad Campaigns</span></div>
+    <a href="service-strategy.html" class="btn-secondary">See the full breakdown →</a>
+  </div>
+</div>
+
+<section class="cta-section" style="border-bottom:none;text-align:center;">
+  <div class="eyebrow" style="justify-content:center;">Not sure which one</div>
+  <h2>Let's figure it out together.</h2>
+  <p class="section-sub" style="margin:0 auto 2rem;">Most clients start with one service and add more once it's working.</p>
+  <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20book%20a%20strategy%20call." target="_blank" class="btn-primary">Book a strategy call →</a>
+</section>
+
+<footer>
+  <div><a href="index.html" class="logo">SKENA<span>.</span></a><div class="fine">Nairobi, Kenya</div></div>
+  <div class="fine">theskena.com</div>
+</footer>
+
+<script>
+  document.querySelectorAll('section').forEach(el=>el.classList.add('reveal'));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script src="script.js"></script>
+</body>
+</html>
