@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="shortcut icon" href="images/favicon.ico">
+<title>Order — Skena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-hero{padding:5rem 4vw 3rem;border-bottom:1px solid var(--line);text-align:center;}
+  .page-hero .eyebrow{justify-content:center;}
+  .page-hero h1{font-size:clamp(2.4rem,6vw,4rem);max-width:700px;margin:0 auto 1rem;}
+
+  .order-wrap{padding:4rem 4vw 6rem;display:grid;grid-template-columns:1.4fr 1fr;gap:3rem;align-items:start;}
+  @media(max-width:900px){.order-wrap{grid-template-columns:1fr;}}
+
+  .order-block{border:1px solid var(--line);background:var(--bg);padding:2rem;margin-bottom:1.8rem;}
+  .order-block h3{font-family:var(--display);font-size:1.4rem;font-weight:400;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.6rem;}
+  .order-block h3 .step-num{color:var(--gold);}
+  .order-block .block-sub{color:var(--text-dim);font-size:0.86rem;margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid var(--line);}
+
+  .field{margin-bottom:1.1rem;}
+  .field label{display:block;font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;}
+  .field input{width:100%;background:var(--bg-alt);border:1px solid var(--line);color:var(--text);padding:0.85rem;font-family:var(--body);font-size:0.95rem;}
+  .field input:focus{outline:none;border-color:var(--gold);}
+  .field input.err{border-color:#b04545;}
+
+  .opt-label{display:block;cursor:pointer;margin-bottom:0.9rem;}
+  .opt-label input{position:absolute;opacity:0;pointer-events:none;}
+  .opt-card{border:1px solid var(--line);background:var(--bg-alt);padding:1.1rem 1.3rem;display:flex;justify-content:space-between;align-items:center;
+    gap:1rem;transition:border-color .2s,background .2s;}
+  .opt-label input:checked + .opt-card{border-color:var(--gold);background:rgba(184,134,11,0.07);}
+  .opt-name{font-weight:600;font-size:0.92rem;}
+  .opt-note{font-size:0.76rem;color:var(--text-dim);margin-top:0.2rem;}
+  .opt-note.free{color:var(--teal);}
+  .opt-price{font-family:var(--display);font-size:1.25rem;color:var(--gold);white-space:nowrap;}
+  .opt-price .per{display:block;font-family:var(--mono);font-size:0.62rem;color:var(--text-dim);text-align:right;}
+
+  .no-sub-msg{display:none;background:rgba(59,175,173,0.1);border:1px solid var(--teal);padding:1.4rem;text-align:center;}
+  .no-sub-msg.show{display:block;}
+  .no-sub-msg .tick{color:var(--teal);font-size:1.6rem;}
+  .no-sub-msg p{font-size:0.86rem;color:var(--text-dim);margin-top:0.4rem;}
+
+  .summary-box{border:1px solid var(--gold);background:var(--bg-alt);padding:2rem;position:sticky;top:6rem;}
+  .summary-box h3{font-family:var(--display);font-size:1.5rem;font-weight:400;margin-bottom:1.4rem;border-bottom:1px solid var(--line);padding-bottom:1rem;}
+  .sum-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;}
+  .sum-row .sum-label{font-size:0.82rem;font-weight:600;}
+  .sum-row .sum-sub{font-size:0.74rem;color:var(--text-dim);margin-top:0.2rem;}
+  .sum-row .sum-price{font-family:var(--display);font-size:1.15rem;color:var(--gold);}
+  .sum-total-row{border-top:1px solid var(--line);padding-top:1.2rem;margin-top:0.4rem;display:flex;justify-content:space-between;align-items:baseline;}
+  .sum-total-label{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;color:var(--text-dim);}
+  .sum-total-amount{font-family:var(--display);font-size:2.2rem;color:var(--gold);}
+  .sum-renewal{font-size:0.72rem;color:var(--text-dim);text-align:right;margin-top:0.3rem;}
+  .summary-box button{width:100%;margin-top:1.6rem;}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav>
+  <a href="index.html" class="logo"><img src="images/logo-mark.png" alt="Skena logo">SKENA<span>.</span></a>
+  <div class="navlinks">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="digital-products.html">Digital Products</a>
+    <a href="work.html">Work</a>
+    <a href="team.html">Team</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%27d%20like%20to%20book%20a%20strategy%20call." target="_blank" class="nav-cta">Book a call →</a>
+</nav>
+
+<section class="page-hero">
+  <div class="eyebrow">Secure order</div>
+  <h1>Finalize your order.</h1>
+  <p class="section-sub" style="margin:0 auto;">Design your custom networking package, then send it to us on WhatsApp.</p>
+</section>
+
+<div class="order-wrap">
+  <div>
+    <div class="order-block">
+      <h3><span class="step-num">00.</span> Your Details</h3>
+      <p class="block-sub">Just enough for us to reach you back.</p>
+      <div class="field">
+        <label>Full Name / Business Name *</label>
+        <input type="text" id="clientName" placeholder="e.g. Brian Masengesho / Acme Corp">
+      </div>
+      <div class="field">
+        <label>WhatsApp Number (if different from this device)</label>
+        <input type="text" id="clientPhone" placeholder="e.g. 0712 345 678">
+      </div>
+    </div>
+
+    <div class="order-block">
+      <h3><span class="step-num">01.</span> Choose Hardware</h3>
+      <p class="block-sub">One-time purchase for your premium physical NFC cards.</p>
+
+      <label class="opt-label">
+        <input type="radio" name="hardware" value="digital_business" checked>
+        <div class="opt-card">
+          <div><div class="opt-name">Digital Business Card</div><div class="opt-note">1 Dynamic NFC card</div></div>
+          <div class="opt-price">1,500 KES</div>
+        </div>
+      </label>
+      <label class="opt-label">
+        <input type="radio" name="hardware" value="google_review">
+        <div class="opt-card">
+          <div><div class="opt-name">Google Review Card</div><div class="opt-note free">✓ No annual subscription required</div></div>
+          <div class="opt-price">1,500 KES</div>
+        </div>
+      </label>
+      <label class="opt-label">
+        <input type="radio" name="hardware" value="static_card">
+        <div class="opt-card">
+          <div><div class="opt-name">Static Contact Card</div><div class="opt-note free">✓ No annual subscription required</div></div>
+          <div class="opt-price">1,500 KES</div>
+        </div>
+      </label>
+      <label class="opt-label">
+        <input type="radio" name="hardware" value="starter_kit">
+        <div class="opt-card">
+          <div><div class="opt-name">Starter Kit</div><div class="opt-note">3 cards: 1 Dynamic, 1 Static, 1 Review</div></div>
+          <div class="opt-price">4,500 KES</div>
+        </div>
+      </label>
+      <label class="opt-label">
+        <input type="radio" name="hardware" value="growth_kit">
+        <div class="opt-card">
+          <div><div class="opt-name">Growth Kit</div><div class="opt-note">5 cards: 2 Dynamic, 2 Review, 1 Static</div></div>
+          <div class="opt-price">6,750 KES</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="order-block">
+      <h3><span class="step-num">02.</span> Choose Software</h3>
+      <p class="block-sub">Required cloud hosting for dynamic profiles. Billed annually.</p>
+
+      <div id="softwareOptions">
+        <label class="opt-label software-tier">
+          <input type="radio" name="software" value="individual">
+          <div class="opt-card">
+            <div><div class="opt-name">Individual</div><div class="opt-note">Basic profile, contact sharing (VCF)</div></div>
+            <div class="opt-price">1,999 KES<span class="per">/ year</span></div>
+          </div>
+        </label>
+        <label class="opt-label software-tier">
+          <input type="radio" name="software" value="individual_plus" checked>
+          <div class="opt-card">
+            <div><div class="opt-name">Individual Plus+ <span style="color:var(--gold);font-family:var(--mono);font-size:0.65rem;">RECOMMENDED</span></div><div class="opt-note">Lead capture, monthly analytics, CSV export</div></div>
+            <div class="opt-price">3,500 KES<span class="per">/ year</span></div>
+          </div>
+        </label>
+        <label class="opt-label software-tier">
+          <input type="radio" name="software" value="enterprise">
+          <div class="opt-card">
+            <div><div class="opt-name">Enterprise</div><div class="opt-note">Instant alerts, weekly reports, priority support</div></div>
+            <div class="opt-price">4,200 KES<span class="per">/ year</span></div>
+          </div>
+        </label>
+      </div>
+
+      <div class="no-sub-msg" id="noSubMsg">
+        <div class="tick">✓</div>
+        <div style="font-weight:600;">No annual subscription required</div>
+        <p>Static and Google Review cards work fully without ongoing hosting fees.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-box">
+    <h3>Investment Summary</h3>
+    <div class="sum-row">
+      <div>
+        <div class="sum-label">Hardware <span style="color:var(--text-dim);font-weight:400;">(one-time)</span></div>
+        <div class="sum-sub" id="sumHwName">Digital Business Card</div>
+      </div>
+      <div class="sum-price" id="sumHwPrice">1,500 KES</div>
+    </div>
+    <div class="sum-row" id="sumSwRow">
+      <div>
+        <div class="sum-label">Software <span style="color:var(--text-dim);font-weight:400;">(annual)</span></div>
+        <div class="sum-sub" id="sumSwName">Individual Plus+</div>
+      </div>
+      <div class="sum-price" id="sumSwPrice">3,500 KES</div>
+    </div>
+    <div class="sum-total-row">
+      <div class="sum-total-label">Total due today</div>
+      <div class="sum-total-amount" id="sumTotal">5,000 KES</div>
+    </div>
+    <div class="sum-renewal" id="sumRenewal">Renews annually at 3,500 KES</div>
+    <button class="btn-primary" onclick="sendOrder()">Finalize via WhatsApp →</button>
+  </div>
+</div>
+
+<footer>
+  <div><a href="index.html" class="logo"><img src="images/logo-mark.png" alt="Skena logo">SKENA<span>.</span></a><div class="fine">Nairobi, Kenya</div></div>
+  <div class="fine">theskena.com</div>
+</footer>
+
+<script>
+  const hardwarePrices = {
+    digital_business: { name: 'Digital Business Card', price: 1500, needsSub: true },
+    google_review:    { name: 'Google Review Card', price: 1500, needsSub: false },
+    static_card:      { name: 'Static Contact Card', price: 1500, needsSub: false },
+    starter_kit:      { name: 'Starter Kit', price: 4500, needsSub: true },
+    growth_kit:       { name: 'Growth Kit', price: 6750, needsSub: true }
+  };
+  const softwarePrices = {
+    none: { name: 'None Required', price: 0 },
+    individual: { name: 'Individual', price: 1999 },
+    individual_plus: { name: 'Individual Plus+', price: 3500 },
+    enterprise: { name: 'Enterprise', price: 4200 }
+  };
+  let lastSoftware = 'individual_plus';
+
+  function updateOrder(){
+    const hwKey = document.querySelector('input[name="hardware"]:checked').value;
+    let swKey = document.querySelector('input[name="software"]:checked').value;
+    const hw = hardwarePrices[hwKey];
+
+    const softwareOptions = document.getElementById('softwareOptions');
+    const noSubMsg = document.getElementById('noSubMsg');
+
+    if(!hw.needsSub){
+      softwareOptions.style.display = 'none';
+      noSubMsg.classList.add('show');
+      swKey = 'none';
+    } else {
+      softwareOptions.style.display = '';
+      noSubMsg.classList.remove('show');
+      if(swKey === 'none'){
+        document.querySelector('input[name="software"][value="'+lastSoftware+'"]').checked = true;
+        swKey = lastSoftware;
+      } else {
+        lastSoftware = swKey;
+      }
+    }
+
+    const sw = softwarePrices[swKey];
+    const total = hw.price + sw.price;
+
+    document.getElementById('sumHwName').textContent = hw.name;
+    document.getElementById('sumHwPrice').textContent = hw.price.toLocaleString() + ' KES';
+
+    const swRow = document.getElementById('sumSwRow');
+    if(sw.price === 0){
+      swRow.style.opacity = '0.4';
+      document.getElementById('sumSwName').textContent = 'Not required';
+      document.getElementById('sumSwPrice').textContent = '0 KES';
+      document.getElementById('sumRenewal').textContent = 'No annual renewal necessary.';
+    } else {
+      swRow.style.opacity = '1';
+      document.getElementById('sumSwName').textContent = sw.name;
+      document.getElementById('sumSwPrice').textContent = sw.price.toLocaleString() + ' KES';
+      document.getElementById('sumRenewal').textContent = 'Renews annually at ' + sw.price.toLocaleString() + ' KES';
+    }
+    document.getElementById('sumTotal').textContent = total.toLocaleString() + ' KES';
+  }
+
+  document.querySelectorAll('input[name="hardware"], input[name="software"]').forEach(el => {
+    el.addEventListener('change', updateOrder);
+  });
+
+  function sendOrder(){
+    const nameEl = document.getElementById('clientName');
+    const name = nameEl.value.trim();
+    const phone = document.getElementById('clientPhone').value.trim();
+
+    if(!name){
+      nameEl.classList.add('err');
+      nameEl.focus();
+      return;
+    }
+    nameEl.classList.remove('err');
+
+    const hwKey = document.querySelector('input[name="hardware"]:checked').value;
+    const swKey = document.querySelector('input[name="software"]:checked').value;
+    const hwName = hardwarePrices[hwKey].name;
+    const swName = softwarePrices[swKey].name;
+    const total = document.getElementById('sumTotal').textContent;
+
+    let msg = "New Skena order\n\n";
+    msg += "Name: " + name + "\n";
+    if(phone) msg += "WhatsApp: " + phone + "\n";
+    msg += "\nHardware: " + hwName + "\n";
+    msg += "Software Plan: " + swName + "\n";
+    msg += "\nTotal due today: " + total + "\n\n";
+    msg += "I'd like to finalize this order.";
+
+    window.open('https://wa.me/254727128689?text=' + encodeURIComponent(msg), '_blank');
+  }
+
+  (function(){
+    const params = new URLSearchParams(window.location.search);
+    const hw = params.get('hw');
+    const sw = params.get('sw');
+    if(hw && hardwarePrices[hw]){
+      const el = document.querySelector('input[name="hardware"][value="'+hw+'"]');
+      if(el) el.checked = true;
+    }
+    if(sw && softwarePrices[sw] && sw !== 'none'){
+      lastSoftware = sw;
+      const el = document.querySelector('input[name="software"][value="'+sw+'"]');
+      if(el) el.checked = true;
+    }
+    updateOrder();
+  })();
+</script>
+<script src="script.js"></script>
+</body>
+</html>

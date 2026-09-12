@@ -39,7 +39,14 @@
 
   .hw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-bottom:1.5rem;}
   .hw-card{border:1px solid var(--line);background:var(--bg);overflow:hidden;}
-  .hw-card img{width:100%;aspect-ratio:1.586/1;object-fit:cover;display:block;}
+  .hw-flip{perspective:1200px;aspect-ratio:1.586/1;cursor:pointer;}
+  .hw-flip-inner{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;}
+  .hw-flip.flipped .hw-flip-inner{transform:rotateY(180deg);}
+  .hw-flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+  .hw-flip-face img{width:100%;height:100%;object-fit:cover;display:block;}
+  .hw-flip-back{transform:rotateY(180deg);}
+  .hw-flip-hint{position:absolute;bottom:0.6rem;right:0.7rem;z-index:2;font-family:var(--mono);font-size:0.62rem;
+    color:#fff;background:rgba(33,29,23,0.55);padding:0.25rem 0.55rem;border-radius:3px;pointer-events:none;}
   .hw-card-body{padding:1.6rem;}
   .hw-card .tc{font-family:var(--mono);font-size:0.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.6rem;}
   .hw-card h4{font-size:1.25rem;margin-bottom:0.5rem;}
@@ -103,7 +110,7 @@
 <div class="grain"></div>
 
 <nav>
-  <a href="index.html" class="logo">SKENA<span>.</span></a>
+  <a href="index.html" class="logo"><img src="images/logo-mark.png" alt="Skena logo">SKENA<span>.</span></a>
   <div class="navlinks">
     <a href="index.html">Home</a>
     <a href="services.html">Services</a>
@@ -121,7 +128,7 @@
   <h1>The last card<br>you will ever buy.</h1>
   <p class="section-sub" style="margin:0 auto 2rem;">Share your contact info, socials, and professional portfolio with a single tap. Premium NFC and QR technology that makes a lasting impression — and never needs reprinting.</p>
   <div class="hero-actions">
-    <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20a%20card." target="_blank" class="btn-primary">Get your card →</a>
+    <a href="order.html" class="btn-primary">Get your card →</a>
     <a href="#packages" class="btn-secondary">View packages ↓</a>
   </div>
 </section>
@@ -176,7 +183,13 @@
 
   <div class="hw-grid">
     <div class="hw-card">
-      <img src="images/card-digital-business.jpg" alt="Digital Business Card">
+      <div class="hw-flip" onclick="this.classList.toggle('flipped')">
+        <div class="hw-flip-inner">
+          <div class="hw-flip-face"><img src="images/card-digital-business.jpg" alt="Digital Business Card front"></div>
+          <div class="hw-flip-face hw-flip-back"><img src="images/card-digital-business-back.jpg" alt="Digital Business Card back"></div>
+        </div>
+        <div class="hw-flip-hint">Tap to flip ⟲</div>
+      </div>
       <div class="hw-card-body">
         <div class="tc">Dynamic Profile</div>
         <h4>Digital Business Card</h4>
@@ -184,12 +197,18 @@
         <div class="hw-note">⚠ Requires an active annual software subscription to host your dynamic online profile.</div>
         <div class="hw-price-row">
           <div class="hw-price">1,500 KES</div>
-          <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20a%20Digital%20Business%20Card." target="_blank" class="btn-secondary">Select →</a>
+          <a href="order.html?hw=digital_business" class="btn-secondary">Select →</a>
         </div>
       </div>
     </div>
     <div class="hw-card">
-      <img src="images/card-google-review.jpg" alt="Google Review Card">
+      <div class="hw-flip" onclick="this.classList.toggle('flipped')">
+        <div class="hw-flip-inner">
+          <div class="hw-flip-face"><img src="images/card-google-review.jpg" alt="Google Review Card front"></div>
+          <div class="hw-flip-face hw-flip-back"><img src="images/card-google-review-back.jpg" alt="Google Review Card back"></div>
+        </div>
+        <div class="hw-flip-hint">Tap to flip ⟲</div>
+      </div>
       <div class="hw-card-body">
         <div class="tc">Local SEO Booster</div>
         <h4>Google Review Card</h4>
@@ -197,12 +216,18 @@
         <div class="hw-note">✓ Zero ongoing fees — functions independently, no subscription needed.</div>
         <div class="hw-price-row">
           <div class="hw-price">1,500 KES</div>
-          <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20a%20Google%20Review%20Card." target="_blank" class="btn-secondary">Select →</a>
+          <a href="order.html?hw=google_review" class="btn-secondary">Select →</a>
         </div>
       </div>
     </div>
     <div class="hw-card">
-      <img src="images/card-static-contact.jpg" alt="Static Contact Card">
+      <div class="hw-flip" onclick="this.classList.toggle('flipped')">
+        <div class="hw-flip-inner">
+          <div class="hw-flip-face"><img src="images/card-static-contact.jpg" alt="Static Contact Card front"></div>
+          <div class="hw-flip-face hw-flip-back"><img src="images/card-static-contact-back.jpg" alt="Static Contact Card back"></div>
+        </div>
+        <div class="hw-flip-hint">Tap to flip ⟲</div>
+      </div>
       <div class="hw-card-body">
         <div class="tc">Offline Networking</div>
         <h4>Static Contact Card</h4>
@@ -210,7 +235,7 @@
         <div class="hw-note">✓ Zero ongoing fees — functions completely offline, no subscription needed.</div>
         <div class="hw-price-row">
           <div class="hw-price">1,500 KES</div>
-          <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20a%20Static%20Contact%20Card." target="_blank" class="btn-secondary">Select →</a>
+          <a href="order.html?hw=static_card" class="btn-secondary">Select →</a>
         </div>
       </div>
     </div>
@@ -229,7 +254,7 @@
           <li><span class="qty">1</span><span class="item-name">Static Contact Card</span><span class="item-note">Subscription-free</span></li>
           <li><span class="qty">1</span><span class="item-name">Google Review Card</span><span class="item-note">Subscription-free</span></li>
         </ul>
-        <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20the%20Starter%20Kit." target="_blank" class="btn-secondary">Select Starter Kit →</a>
+        <a href="order.html?hw=starter_kit" class="btn-secondary">Select Starter Kit →</a>
       </div>
     </div>
     <div class="kit-card best">
@@ -244,7 +269,7 @@
           <li><span class="qty">2</span><span class="item-name">Google Review Cards</span><span class="item-note">Place at multiple checkout points</span></li>
           <li><span class="qty">1</span><span class="item-name">Static Contact Card</span><span class="item-note">For offline emergencies</span></li>
         </ul>
-        <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%20would%20like%20to%20order%20the%20Growth%20Kit." target="_blank" class="btn-primary" style="text-align:center;">Select Growth Kit →</a>
+        <a href="order.html?hw=growth_kit" class="btn-primary" style="text-align:center;">Select Growth Kit →</a>
       </div>
     </div>
   </div>
@@ -266,7 +291,7 @@
         <li class="no">Lead capture</li>
         <li class="no">Analytics</li>
       </ul>
-      <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%27d%20like%20the%20Individual%20software%20plan." target="_blank" class="btn-secondary">Select Plan →</a>
+      <a href="order.html?sw=individual" class="btn-secondary">Select Plan →</a>
     </div>
     <div class="plan-card popular">
       <div class="badge">MOST POPULAR</div>
@@ -278,7 +303,7 @@
         <li>Monthly analytics report</li>
         <li>Download leads as CSV</li>
       </ul>
-      <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%27d%20like%20the%20Individual%20Plus%20software%20plan." target="_blank" class="btn-primary" style="text-align:center;">Select Plan →</a>
+      <a href="order.html?sw=individual_plus" class="btn-primary" style="text-align:center;">Select Plan →</a>
     </div>
     <div class="plan-card">
       <div class="plan-best-for">Best for: Businesses needing instant follow-up</div>
@@ -289,7 +314,7 @@
         <li>Weekly lead summary reports</li>
         <li>Priority support</li>
       </ul>
-      <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%27d%20like%20the%20Enterprise%20software%20plan." target="_blank" class="btn-secondary">Select Plan →</a>
+      <a href="order.html?sw=enterprise" class="btn-secondary">Select Plan →</a>
     </div>
   </div>
 </section>
@@ -369,11 +394,11 @@
   <div class="eyebrow" style="justify-content:center;">Ready to order</div>
   <h2>Let's get your card made.</h2>
   <p class="section-sub" style="margin:0 auto 2rem;">Message us on WhatsApp with your name, job title, and what you'd like on the card — we'll take it from there.</p>
-  <a href="https://wa.me/254727128689?text=Hi%20Skena%2C%20I%27d%20like%20to%20order%20a%20card.%20Here%20are%20my%20details%3A%20%0AName%3A%20%0AJob%20title%3A%20%0ACompany%3A%20%0APackage%20I%27m%20interested%20in%3A%20" target="_blank" class="btn-primary">Order via WhatsApp →</a>
+  <a href="order.html" class="btn-primary">Start your order →</a>
 </section>
 
 <footer>
-  <div><a href="index.html" class="logo">SKENA<span>.</span></a><div class="fine">Nairobi, Kenya</div></div>
+  <div><a href="index.html" class="logo"><img src="images/logo-mark.png" alt="Skena logo">SKENA<span>.</span></a><div class="fine">Nairobi, Kenya</div></div>
   <div class="fine">theskena.com</div>
 </footer>
 

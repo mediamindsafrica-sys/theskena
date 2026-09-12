@@ -20,6 +20,43 @@
     }
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
+    // Mobile nav menu — three-dot toggle that opens a dropdown with the same links
+    const nav = document.querySelector('nav');
+    const navlinks = document.querySelector('.navlinks');
+    const navCta = document.querySelector('.nav-cta');
+    if(nav && navlinks && !document.querySelector('.mobile-nav-toggle')){
+      const toggle = document.createElement('button');
+      toggle.className = 'mobile-nav-toggle';
+      toggle.setAttribute('aria-label', 'Open menu');
+      toggle.innerHTML = '⋮';
+
+      const panel = document.createElement('div');
+      panel.className = 'mobile-nav-panel';
+      panel.innerHTML = navlinks.innerHTML + (navCta ? navCta.outerHTML : '');
+
+      if(navCta && navCta.parentNode === nav){
+        const actionsWrap = document.createElement('div');
+        actionsWrap.className = 'mobile-actions';
+        nav.insertBefore(actionsWrap, navCta);
+        actionsWrap.appendChild(toggle);
+        actionsWrap.appendChild(navCta);
+      } else {
+        nav.appendChild(toggle);
+      }
+      nav.appendChild(panel);
+
+      toggle.addEventListener('click', function(e){
+        e.stopPropagation();
+        panel.classList.toggle('open');
+      });
+      panel.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){ panel.classList.remove('open'); });
+      });
+      document.addEventListener('click', function(e){
+        if(!nav.contains(e.target)) panel.classList.remove('open');
+      });
+    }
+
     // wire up every element with data-lightbox-type + data-lightbox-id
     document.querySelectorAll('[data-lightbox]').forEach(function(el){
       el.addEventListener('click', function(e){

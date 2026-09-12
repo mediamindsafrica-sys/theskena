@@ -18,11 +18,11 @@
   .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
   .hero-video-overlay{position:absolute;inset:0;z-index:1;
     background:linear-gradient(180deg, rgba(20,17,13,0.55) 0%, rgba(20,17,13,0.72) 65%, rgba(20,17,13,0.85) 100%);}
-  .hero>*{position:relative;z-index:2;}
+  .hero>*:not(.hero-video):not(.hero-video-overlay){position:relative;z-index:2;}
   .hero-meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:0.72rem;color:rgba(255,255,255,0.65);padding-top:2rem;}
   .hero h1{font-size:clamp(3rem,9vw,7rem);line-height:0.95;margin:1.3rem 0 1.4rem;max-width:1000px;color:#FAF6EE;}
   .hero h1 .accent{color:var(--gold);}
-  .hero-sub{max-width:560px;font-size:1.15rem;color:rgba(255,255,255,0.82);margin-bottom:2.2rem;}
+  .hero-sub{max-width:560px;font-size:1.15rem;color:rgba(255,255,255,0.85);margin-bottom:2.2rem;}
   .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
 
   .problem{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
@@ -67,7 +67,7 @@
 <div class="grain"></div>
 
 <nav>
-  <a href="index.html" class="logo">SKENA<span>.</span></a>
+  <a href="index.html" class="logo"><img src="images/logo-mark.png" alt="Skena logo">SKENA<span>.</span></a>
   <div class="navlinks">
     <a href="index.html" class="active">Home</a>
     <a href="services.html">Services</a>
@@ -141,16 +141,16 @@
   <h2>Four ways we get you there.</h2>
   <p class="section-sub">Each one has its own page — what it includes, how it works, and what it costs.</p>
   <div class="services-preview">
-    <a href="service-production.html" class="svc-link">
-      <div class="tc">SERVICE 01</div>
-      <h3>Video Production</h3>
-      <p>Documentaries, testimonials and brand films that make people trust you before they've met you.</p>
-      <div class="arrow">Learn more →</div>
-    </a>
     <a href="service-social.html" class="svc-link">
-      <div class="tc">SERVICE 02</div>
+      <div class="tc">SERVICE 01</div>
       <h3>Social Media Content</h3>
       <p>A steady stream of reels and posts built around what actually gets people to act.</p>
+      <div class="arrow">Learn more →</div>
+    </a>
+    <a href="service-production.html" class="svc-link">
+      <div class="tc">SERVICE 02</div>
+      <h3>Video Production</h3>
+      <p>Documentaries, testimonials and brand films that make people trust you before they've met you.</p>
       <div class="arrow">Learn more →</div>
     </a>
     <a href="service-events.html" class="svc-link">
@@ -204,7 +204,7 @@
 
 <footer>
   <div>
-    <a href="index.html" class="logo">SKENA<span>.</span></a>
+    <a href="index.html" class="logo"><img src="images/logo-mark.png" alt="Skena logo">SKENA<span>.</span></a>
     <div class="fine">Nairobi, Kenya</div>
   </div>
   <div class="fine">theskena.com</div>
